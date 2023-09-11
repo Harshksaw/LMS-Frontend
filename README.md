@@ -54,3 +54,27 @@
   ╰─ npm i @reduxjs/toolkit react-redux react-router-dom react-icons react-chartjs-2 chart.js daisyui axios react-hot-toast @tailwindcss/line-clamp
 
  ```
+
+###Configure auto import sort esline
+
+ ```
+  1. import eslint simple import
+   npm i -D eslint-plugin-simple-import-sort
+ ```
+ 2. Add rule in `eslint.cjs`
+ 3. add plugin 
+ ```
+ [..., 'simple-import-sort]
+ ```
+
+ 4. To Enable auto import sort on file save in vscode
+ ```
+ -open `settings.json`
+ -add the folling config
+
+     plugins: ['react-refresh', 'simple-import-sort'],
+  rules: {
+    'simple-import-sort/imports' : 'errors', 
+    'react-refresh/only-export-components': [
+      'warn',
+ ```
