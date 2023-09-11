@@ -43,6 +43,14 @@
  ```
 
  ```
-4. add the tailwind directives at the top of the 'indexcss
+4. add the tailwind directives at the top of the 'indexcss'
+
+ ```
+
+ ### Adding Plugins and dependencies
+
+ ```
+  install dependecies ->
+  ╰─ npm i @reduxjs/toolkit react-redux react-router-dom react-icons react-chartjs-2 chart.js daisyui axios react-hot-toast @tailwindcss/line-clamp
 
  ```
