@@ -1,21 +1,37 @@
 import { AiFillCloseCircle } from "react-icons/ai";
 import { FiMenu } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
-// import Footer from "./Components/Footer";
+import Footer from "../Components/Footer";
 
 export default function HomeLayout({ children }) {
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  //for checkin is use is Logged in
+  const isLoggedin = useSelector((state) => state?.auth?.isLoggedIn);
+  //for displaying the option acc to role
+
+  const role = useSelector((state) => state?.auth?.role);
+
   function changewidth() {
     const drawerside = document.getElementsByClassName("drawer-side");
-    drawerside[0].style.width = 'auto';
+    drawerside[0].style.width = "auto";
   }
 
   function hideDrawer() {
     const element = document.getElementsByClassName("drawer-toggle");
     element[0].checked = false;
     const drawerside = document.getElementsByClassName("drawer-side");
-    drawerside[0].style.width = '0';
+    drawerside[0].style.width = "0";
   }
+
+  function handleLogout(e){
+    e.preventDefualt()
+    // const res = await dispatch(logout)
+    // if(res?.payload?.success)    
+  }
+
 
   return (
     <div className="min-h-[90vh]">
@@ -33,29 +49,58 @@ export default function HomeLayout({ children }) {
         </div>
         <div className="drawer-side w-0">
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
-            <ul className="menu p-4 w-48 sm:w-80 bg-base-200 text-base-content relative">
-              <li className="w-fit absolute right-2 z-50">
-                <button onClick={hideDrawer}>
-                  <AiFillCloseCircle size={24} />
-                </button>
-              </li>
+          <ul className="menu p-4 w-48 sm:w-80 bg-base-200 text-base-content relative">
+            <li className="w-fit absolute right-2 z-50">
+              <button onClick={hideDrawer}>
+                <AiFillCloseCircle size={24} />
+              </button>
+            </li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            {isLoggedin && role === "ADMIN" && (
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/admin/dasboard">Admin Dashboard</Link>
               </li>
-              <li>
-                <Link to="/cources">ALL cources</Link>
+            )}
+            <li>
+              <Link to="/cources">ALL cources</Link>
+            </li>
+            <li>
+              <Link to="/contact">ALL cources</Link>
+            </li>
+            <li>
+              <Link to="/about">ALL cources</Link>
+            </li>
+            {!isLoggedin && (
+              <li className="absolute bottom-4 w-[90%]">
+                <div className="w-full flex item-center justify-center">
+                  <button className="btn-primary px-4 py-1 font-semibold rounded-md w-full ">
+                    <Link to="/login">Login</Link>
+                  </button>
+                  <button className="btn-secondary px-4 py-1 font-semibold rounded-md w-full ">
+                    <Link to="/Signup">Signup</Link>
+                  </button>
+                </div>
               </li>
-              <li>
-                <Link to="/contact">ALL cources</Link>
+            )}
+            {isLoggedin && (
+              <li className="absolute bottom-4 w-[90%]">
+                <div className="w-full flex item-center justify-center">
+                  <button className="btn-primary px-4 py-1 font-semibold rounded-md w-full ">
+                    <Link to="/Profile">Profile</Link>
+                  </button>
+                  <button className="btn-secondary px-4 py-1 font-semibold rounded-md w-full ">
+                    <Link onClick={handleLogout}>Logout</Link>
+                  </button>
+                </div>
               </li>
-              <li>
-                <Link to="/about">ALL cources</Link>
-              </li>
-            </ul>
-
+            )}
+          </ul>
         </div>
       </div>
       {children}
+      <Footer />
     </div>
   );
 }
