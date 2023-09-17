@@ -47,6 +47,9 @@
 
  npx tailwindcss init -p
 
+ and add Daisui 
+ npm i -D daisyui@latest
+
  ```
 
  ### Adding Plugins and dependencies
