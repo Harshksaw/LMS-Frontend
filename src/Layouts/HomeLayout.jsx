@@ -49,7 +49,7 @@ export default function HomeLayout({ children }) {
         </div>
         <div className="drawer-side w-0">
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-48 sm:w-80 bg-base-200 text-base-content relative">
+          <ul className="menu p-4 h-[90%] w-48 sm:w-80 bg-base-200 text-base-content relative">
             <li className="w-fit absolute right-2 z-50">
               <button onClick={hideDrawer}>
                 <AiFillCloseCircle size={24} />
@@ -70,10 +70,10 @@ export default function HomeLayout({ children }) {
               <Link to="/contact">ALL cources</Link>
             </li>
             <li>
-              <Link to="/about">ALL cources</Link>
+              <Link to="/about">About us</Link>
             </li>
             {!isLoggedin && (
-              <li className="absolute bottom-4 w-[90%]">
+              <li className="absolute  bottom-4 w-[90%]">
                 <div className="w-full flex item-center justify-center">
                   <button className="btn-primary px-4 py-1 font-semibold rounded-md w-full ">
                     <Link to="/login">Login</Link>
