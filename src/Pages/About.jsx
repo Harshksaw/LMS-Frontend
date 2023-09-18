@@ -1,6 +1,6 @@
 import images from "../Assets/Images/images.jpeg";
-import images3 from "../Assets/Images/images3.jpeg";
 import img3 from "../Assets/Images/img3.jpeg";
+import img4 from "../Assets/Images/img4.jpeg";
 import img31 from "../Assets/Images/img31.jpeg";
 import HomeLayout from "../Layouts/HomeLayout";
 
@@ -48,7 +48,7 @@ export default function About() {
                         </div>
                         <div id="slide2" className="carousel-item relative w-full">
                             <div className="flex flex-col items-center justify-center gap-4 px-[15%]">
-                                <img src={images3} className="w-90 rounded-full border-2 border-gray-400" />
+                                <img src={img4} className="w-90 rounded-full border-2 border-gray-400" />
                                 <div className="absolute w-[70%] flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                                     <a href="#slide1" className="btn btn-circle">
                                         ❮
