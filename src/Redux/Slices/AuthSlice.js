@@ -32,10 +32,43 @@ export const createAccount = createAsyncThunk("/auth/signup", async (data) => {
     }
 });
 
+//action ->
+export const login = createAsyncThunk("/auth/login", async(data)=>{
+    try {
+        let res = axiosInstance.post("user/login", data);
+        // function to display notifications during the asynchronous process:
+        toast.promise(res, {
+            loading: "Wait! Authentication in Progress",
+            success: (data) => {
+                return data?.data?.message;
+            },
+            error: "Failed to Login account",
+        });
+
+        // getting response resolved here
+        return (await res).data;
+    } catch (error) {
+        toast.error(error?.response?.data?.message);
+    }
+
+
+})
+
+
 const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {},
+    extraReducers:(builder)=>{
+        // action -> defined outised the Slice now to consider those  we need to use 
+        builder.addCase(login.fulfilled, (state , action)=>{
+            localStorage.setItem('data', JSON.stringify(action?.payload?.user))
+            localStorage.setItem('isLoggedIn', true)
+            localStorage.setItem('role', action?.payload?.user?.role);
+            state.isLoggedIn = true;
+            state.role = action?.payload?.user?.role
+        })
+    }
 });
 
 export default authSlice.reducer;
