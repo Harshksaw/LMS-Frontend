@@ -1,13 +1,14 @@
 import { AiFillCloseCircle } from "react-icons/ai";
 import { FiMenu } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 
 import Footer from "../Components/Footer";
+import { logout } from "../Redux/Slices/AuthSlice";
 
 export default function HomeLayout({ children }) {
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   //for checkin is use is Logged in
   const isLoggedin = useSelector((state) => state?.auth?.isLoggedIn);
   //for displaying the option acc to role
@@ -26,10 +27,12 @@ export default function HomeLayout({ children }) {
     drawerside[0].style.width = "0";
   }
 
-  function handleLogout(e){
-    e.preventDefualt()
-    // const res = await dispatch(logout)
-    // if(res?.payload?.success)    
+  async function handleLogout(e){
+    e.preventDefault()
+    const res = await dispatch(logout())
+    if(res?.payload?.success) {
+      navigate("/")
+    }   
   }
 
 
