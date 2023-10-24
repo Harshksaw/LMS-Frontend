@@ -10,6 +10,7 @@ import HomePage from "./Pages/HomePage";
 import Login from './Pages/Login';
 import Notfound from "./Pages/Notfound";
 import Signup from "./Pages/Signup";
+import CourseDescription from "./Pages/Course/CourseDescription";
 function App() {
   return (
     //using layout
@@ -17,10 +18,17 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/about" element={<About/>}/>
+        
         <Route path="/signup"  element={<Signup/>}/>
         <Route path="/login"  element={<Login/>}/>
+        
         <Route path="/courses"  element={<CourseList/>}/>
+        <Route path="/course/description"  element={<CourseDescription/>}/>
+
+
         <Route path="/contact"  element={<Contact/>}/>
+
+
         <Route path="/denied"  element={<Denied/>}/>
         <Route path = "*" element= {<Notfound/>}/>
 
