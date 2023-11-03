@@ -70,7 +70,7 @@ const Signup = () => {
 
         // checking the name field length
         if (signupData.fullName.length < 5) {
-            toast.error("Name should be atleast of 5 characters");
+            toast.error("Name should be atleast of 6 characters");
             return;
         }
 
@@ -123,7 +123,7 @@ const Signup = () => {
                     onSubmit={createNewAccount}
                     className="flex flex-col justify-center gap-3 rounded-lg p-4 text-white w-96 shadow-[0_0_10px_black]"
                 >
-                    <h1 className="text-center text-2xl font-bold">Registration Page</h1>
+                    <h1 className="text-center text-2xl font-bold">Registration Page </h1>
 
                     {/* input for image file */}
                     <label className="cursor-pointer" htmlFor="image_uploads">
