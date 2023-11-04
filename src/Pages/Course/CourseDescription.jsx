@@ -12,7 +12,7 @@ export default function CourseDescription() {
     useEffect(()=>{
         console.log(locator)
     },[])
-  return (
+(
     <div>
         <HomeLayout>
                 <div className="min-h-[90vh] px-20 pt-12 flex flex-col items-center justify-center text-white "></div>
