@@ -31,10 +31,10 @@ function App() {
         <Route path="/contact"  element={<Contact/>}/>
 
         {/* //accessible only to admin */}
-        <Route element={<RequireAuth allowedRoles={['ADMIN']}/>}>
+        {/* <Route element={<RequireAuth allowedRoles={['USER']}/>}> */}
 
-          <Route path="/course/create" element={<CreateCourse/>} />
-        </Route>
+        <Route path="/course/create" element={<CreateCourse/>} />
+        {/* </Route> */}
 
 
         <Route path="/denied"  element={<Denied/>}/>

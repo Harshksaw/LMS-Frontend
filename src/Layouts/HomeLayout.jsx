@@ -63,7 +63,12 @@ export default function HomeLayout({ children }) {
             </li>
             {isLoggedin && role === "ADMIN" && (
               <li>
-                <Link to="/admin/dasboard">Admin Dashboard</Link>
+                <Link to="/admin/dashboard">Admin Dashboard</Link>
+              </li>
+            )}
+            {isLoggedin && role === "ADMIN" && (
+              <li>
+                <Link to="/course/create">Create New Course </Link>
               </li>
             )}
             <li>
