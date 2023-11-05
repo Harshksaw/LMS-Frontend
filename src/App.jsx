@@ -13,32 +13,37 @@ import HomePage from "./Pages/HomePage";
 import Login from './Pages/Login';
 import Notfound from "./Pages/Notfound";
 import Signup from "./Pages/Signup";
+import Profile from './Pages/User/Profile';
 function App() {
   return (
     //using layout
     <>
       <Routes>
-        <Route path="/" element={<HomePage/>}/>
-        <Route path="/about" element={<About/>}/>
-        
-        <Route path="/signup"  element={<Signup/>}/>
-        <Route path="/login"  element={<Login/>}/>
-        
-        <Route path="/courses"  element={<CourseList/>}/>
-        <Route path="/course/description"  element={<CourseDescription/>}/>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<About />} />
+
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+
+        <Route path="/courses" element={<CourseList />} />
+        <Route path="/course/description" element={<CourseDescription />} />
 
 
-        <Route path="/contact"  element={<Contact/>}/>
+        <Route path="/contact" element={<Contact />} />
 
         {/* //accessible only to admin */}
-        {/* <Route element={<RequireAuth allowedRoles={['USER']}/>}> */}
+        <Route element={<RequireAuth allowedRoles={['ADMIN']} />}>
 
-        <Route path="/course/create" element={<CreateCourse/>} />
-        {/* </Route> */}
+          <Route path="/course/create" element={<CreateCourse />} />
+        </Route>
+        {/* AUTH wrapper */}
+        <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} /> } >
 
+          <Route path="/user/profile" element={<Profile/>}/>
+        </Route>
 
-        <Route path="/denied"  element={<Denied/>}/>
-        <Route path = "*" element= {<Notfound/>}/>
+        <Route path="/denied" element={<Denied />} />
+        <Route path="*" element={<Notfound />} />
 
       </Routes>
     </>
