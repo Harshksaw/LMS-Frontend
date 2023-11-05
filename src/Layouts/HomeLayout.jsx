@@ -96,7 +96,7 @@ export default function HomeLayout({ children }) {
               <li className="absolute bottom-4 w-[90%]">
                 <div className="w-full flex item-center justify-center">
                   <button className="btn-primary px-4 py-1 font-semibold rounded-md w-full ">
-                    <Link to="/Profile">Profile</Link>
+                    <Link to="user/profile">Profile</Link>
                   </button>
                   <button className="btn-secondary px-4 py-1 font-semibold rounded-md w-full ">
                     <Link onClick={handleLogout}>Logout</Link>
