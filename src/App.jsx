@@ -14,6 +14,7 @@ import Login from './Pages/Login';
 import Notfound from "./Pages/Notfound";
 import Signup from "./Pages/Signup";
 import Profile from './Pages/User/Profile';
+import EditProfile from "./Pages/User/EditProfile";
 function App() {
   return (
     //using layout
@@ -40,6 +41,7 @@ function App() {
         <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} /> } >
 
           <Route path="/user/profile" element={<Profile/>}/>
+          <Route path="/user/editprofile" element={<EditProfile/>}/>
         </Route>
 
         <Route path="/denied" element={<Denied />} />
