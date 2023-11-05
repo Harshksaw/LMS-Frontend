@@ -2,18 +2,21 @@
 import { useState } from "react"
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux"
-import { updateProfile } from "../../Redux/Slices/AuthSlice";
+import { useNavigate } from "react-router-dom";
+
+import { getUserData, updateProfile } from "../../Redux/Slices/AuthSlice";
+import HomeLayout from '../../Layouts/HomeLayout';
 
 
 
 export default function EditProfile() {
     const dispatch = useDispatch()
-
+    const navigate = useNavigate()
     const [data, setData] = useState({
         previewImage: "",
         fullName: "",
         avatar: undefined,
-        userId: undefined,
+        // userId: undefined,
         userId: useSelector((state) => state?.auth?.data?._id)
     })
     function handleImageUpload(e) {
@@ -52,13 +55,29 @@ export default function EditProfile() {
         const formData = new FormData();
         formData.append("fullName", data.fullName)
         formData.append("avatar", data.avatar)
-
+            //API Request usng asyncthunk
         await dispatch(updateProfile(data.userId, data))
+        await dispatch(getUserData())
+        
+        navigate("/user/profile")
+
     }
 
     return (
-        <div>
+        <HomeLayout>
+            <div className="flex items-center justify-center h-[100vh]"
+            
+            >
+                <form
+                onSubmit={onFormSubmit}
+                className="flex flex-col justify-center gap-5 rounded-lg text-white w-80 p-5 min-h-[26rem]  shadow-[0_0_10px_black] "
+                >
 
-        </div>
+                </form>
+
+
+            </div>
+
+        </HomeLayout>
     )
 }

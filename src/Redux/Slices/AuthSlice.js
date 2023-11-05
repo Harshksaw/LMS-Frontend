@@ -72,6 +72,16 @@ export const logout = createAsyncThunk( 'auth/logout', async()=>{
         toast.error(error?.response?.data?.message);
     }
 });
+
+export const getUserData = createAsyncThunk("/user/details" , async()=>{
+    try{
+        const res = axiosInstance.post("user/me");
+        return (await res).data;
+    }catch(error){
+        toast.error(error.message)
+    }
+})
+
 export const updateProfile = createAsyncThunk( 'user/update', async(id, data)=>{
     try{
 
@@ -111,6 +121,14 @@ const authSlice = createSlice({
 
             state.isLoggedIn = false;
             state.role = "";
+
+        })
+        .addCase(getUserData.fulfilled, (state, action)=>{
+            localStorage.setItem('data', JSON.stringify(action?.payload?.user))
+            localStorage.setItem('isLoggedIn', true)
+            localStorage.setItem('role', action?.payload?.user?.role);
+            state.isLoggedIn = true;
+            state.role = action?.payload?.user?.role
 
         })
     }
