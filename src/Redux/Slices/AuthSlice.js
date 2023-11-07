@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast";
 
 import axiosInstance from "../../Helper/axiosinstance";
 
+console.log(localStorage.getItem("data"))
 const initialState = {
     isLoggedIn: localStorage.getItem("isLoggedIn") || false,
     role: localStorage.getItem("role") || "",
@@ -75,19 +76,19 @@ export const logout = createAsyncThunk( 'auth/logout', async()=>{
 
 export const getUserData = createAsyncThunk("/user/details" , async()=>{
     try{
-        const res = axiosInstance.post("user/me");
+        const res = axiosInstance.get("user/me");
         return (await res).data;
     }catch(error){
         toast.error(error.message)
     }
 })
 
-export const updateProfile = createAsyncThunk( 'user/update', async(id, data)=>{
+export const updateProfile = createAsyncThunk( 'user/update/profile', async(data)=>{
     try{
 
 
         //api call
-        const res = axiosInstance(`user/update/${id}`, data);
+        const res = axiosInstance.put(`user/update/${data[0]}`, data[1]);
         toast.promise(res, {
             loading:"wait profile update in progress",
             success:(data) => {
@@ -124,6 +125,7 @@ const authSlice = createSlice({
 
         })
         .addCase(getUserData.fulfilled, (state, action)=>{
+
             localStorage.setItem('data', JSON.stringify(action?.payload?.user))
             localStorage.setItem('isLoggedIn', true)
             localStorage.setItem('role', action?.payload?.user?.role);

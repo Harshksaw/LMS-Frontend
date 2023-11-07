@@ -1,13 +1,13 @@
 
 import { useState } from "react"
 import toast from "react-hot-toast";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import { BsPersonCircle } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom";
 
-import { getUserData, updateProfile } from "../../Redux/Slices/AuthSlice";
 import HomeLayout from '../../Layouts/HomeLayout';
-import { BsPersonCircle } from "react-icons/bs";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import { getUserData, updateProfile } from "../../Redux/Slices/AuthSlice";
 
 
 
@@ -37,7 +37,7 @@ export default function EditProfile() {
         }
     }
     function handleInputChange(e) {
-        const [name, value] = e.target;
+        const { name, value } = e.target;
         setData({
             ...data,
             [name]: value
@@ -58,7 +58,7 @@ export default function EditProfile() {
         formData.append("fullName", data.fullName)
         formData.append("avatar", data.avatar)
         //API Request usng asyncthunk
-        await dispatch(updateProfile(data.userId, data))
+        await dispatch(updateProfile([data.userId, formData]))
         await dispatch(getUserData())
 
         navigate("/user/profile")
@@ -84,10 +84,11 @@ export default function EditProfile() {
                             <BsPersonCircle className="w-28 h-28 rounded-full m-auto" />
 
                         )}
+                        <input onChange={handleImageUpload} className="hidden" type="file" id="image_uploads"
+                        name="image_uploads" accept=".jpg , .png ,.svg , .jpeg" />
 
                     </label>
-                    <input onChange={handleImageUpload} className="hidden" type="file" id="image_uploads"
-                        name="image_uploads" accept=".jpg , .png .svg , .jpeg" />
+                    
                     <div className="flex flex-col gap-1">
                         <label htmlFor="fullName" className="text-lg font-semibold ">Full Name</label>
                         <input
@@ -105,7 +106,7 @@ export default function EditProfile() {
                         Update Profile
                     </button>
                     <Link to="/user/profile" >
-                        <p className="link text-accent cursor-pointer flex items-center justify-center w-full gap-2"> <AiOutlineArrowLeft/> GO back to Profile</p>
+                        <p className="link text-accent cursor-pointer flex items-center justify-center w-full gap-2"> <AiOutlineArrowLeft /> GO back to Profile</p>
                     </Link>
 
                 </form>

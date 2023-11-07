@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
+import { Link } from 'react-router-dom';
 
 import HomeLayout from "../../Layouts/HomeLayout";
-import { Link } from 'react-router-dom';
 
 
 export default function Profile() {
@@ -35,7 +35,7 @@ export default function Profile() {
                             <button >Change Password</button>
                         </Link>
                         <Link to="/user/editprofile" className = "w-1/2 bg-yellow-400  hover:bg-yellow-600 transition-all duration-300 rounded-sm font-semibold py-2 cursor-pointer text-center " >
-                            <button >Edit Subscription</button>
+                            <button >Edit Profile</button>
                         </Link>
 
 
