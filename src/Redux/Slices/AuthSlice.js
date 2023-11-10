@@ -7,7 +7,7 @@ console.log(localStorage.getItem("data"))
 const initialState = {
     isLoggedIn: localStorage.getItem("isLoggedIn") || false,
     role: localStorage.getItem("role") || "",
-    data: JSON.parse(localStorage.getItem("data")) || {},
+    data: JSON.parse(localStorage.getItem("data") )|| {}
 };
 
 //thunk -> a logic that will perform work later
@@ -83,7 +83,7 @@ export const getUserData = createAsyncThunk("/user/details" , async()=>{
     }
 })
 
-export const updateProfile = createAsyncThunk( 'user/update/profile', async(data)=>{
+export const updateProfile = createAsyncThunk('user/update/profile', async(data)=>{
     try{
 
 
@@ -125,11 +125,12 @@ const authSlice = createSlice({
 
         })
         .addCase(getUserData.fulfilled, (state, action)=>{
-
+            if(!action?.payload?.user) return;
             localStorage.setItem('data', JSON.stringify(action?.payload?.user))
             localStorage.setItem('isLoggedIn', true)
             localStorage.setItem('role', action?.payload?.user?.role);
             state.isLoggedIn = true;
+            state.data = action?.payload?.user
             state.role = action?.payload?.user?.role
 
         })

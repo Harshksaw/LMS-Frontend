@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import HomeLayout from "../Layouts/HomeLayout";
-import { login } from "../Redux/Slices/AuthSlice";
+import { login } from "../Redux/Slices/authSlice";
 
 const Login = () => {
     const dispatch = useDispatch();

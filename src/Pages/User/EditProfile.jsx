@@ -46,6 +46,7 @@ export default function EditProfile() {
     }
     async function onFormSubmit(e) {
         e.preventDefault()
+        console.log(data)
         if (!data.fullName || !data.avatar) {
             toast.error("All fields are mandatory")
             return
@@ -57,6 +58,7 @@ export default function EditProfile() {
         const formData = new FormData();
         formData.append("fullName", data.fullName)
         formData.append("avatar", data.avatar)
+        // console.log(formData.entries.next())
         //API Request usng asyncthunk
         await dispatch(updateProfile([data.userId, formData]))
         await dispatch(getUserData())

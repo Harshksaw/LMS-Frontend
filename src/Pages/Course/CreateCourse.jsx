@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 import HomeLayout from '../../Layouts/HomeLayout';
-import { createNewCourse } from '../../Redux/Slices/CourseSlice';
+import { createNewCourse } from '../../Redux/Slices/courseSlice';
 export default function CreateCourse() {
 
 

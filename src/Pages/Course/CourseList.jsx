@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import CourseCard from '../../Components/CourseCard';
 import HomeLayout from '../../Layouts/HomeLayout';
-import { getAllCourses } from '../../Redux/Slices/CourseSlice';
+import { getAllCourses } from '../../Redux/Slices/courseSlice';
 
 
 export default function CourseList() {
