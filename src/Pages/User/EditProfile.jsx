@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom";
 
 import HomeLayout from '../../Layouts/HomeLayout';
-import { getUserData, updateProfile } from "../../Redux/Slices/AuthSlice";
+import { getUserData, updateProfile } from "../../Redux/Slices/authSlice";
+
 
 
 
@@ -56,14 +57,12 @@ export default function EditProfile() {
             return
         }
         const formData = new FormData();
-        formData.append("fullName", data.fullName)
-        formData.append("avatar", data.avatar)
-        // console.log(formData.entries.next())
-        //API Request usng asyncthunk
-        await dispatch(updateProfile([data.userId, formData]))
-        await dispatch(getUserData())
+        formData.append("fullName", data.fullName);
+        formData.append("avatar", data.avatar);
+        await dispatch(updateProfile([data.userId, formData]));
+        await dispatch(getUserData());
 
-        navigate("/user/profile")
+        navigate("/user/profile");
 
     }
 
