@@ -15,6 +15,7 @@ import Notfound from "./Pages/Notfound";
 import Signup from "./Pages/Signup";
 import Profile from './Pages/User/Profile';
 import EditProfile from "./Pages/User/EditProfile";
+import CheckOut from "./Pages/Payment/Checkout";
 function App() {
   return (
     //using layout
@@ -42,6 +43,7 @@ function App() {
 
           <Route path="/user/profile" element={<Profile/>}/>
           <Route path="/user/editprofile" element={<EditProfile />} />
+          <Route path="/checkout" element= {<CheckOut/>}/>
         </Route>
 
         <Route path="/denied" element={<Denied />} />

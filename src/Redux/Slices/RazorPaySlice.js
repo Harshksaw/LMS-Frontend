@@ -33,7 +33,7 @@ export const purchaseCourseBundle = createAsyncThunk(
         }
     }
 );
-export const verifiyUserPayment = createAsyncThunk(
+export const verifyUserPayment = createAsyncThunk(
     "/payments.verify",
     async (data) => {
         try {
@@ -96,18 +96,18 @@ const razorpaySlice = createSlice({
         .addCase(purchaseCourseBundle.fulfilled, (state, action)=>{
             state.subscription_id = action?.payload?.subscription_id;
         })
-        .addCase(verifiyUserPayment.fulfilled, (state, action)=>{
+        .addCase(verifyUserPayment.fulfilled, (state, action)=>{
             toast.success(action?.payload?.message)
             state.isPaymentVerified = action?.payload?.success
         })
-        .addCase(verifiyUserPayment.rejected, (state, action)=>{
+        .addCase(verifyUserPayment.rejected, (state, action)=>{
             toast.success(action?.payload?.message)
             state.isPaymentVerified = action?.payload?.success
         })
         .addCase(getPaymentRecord.fulfilled, (state, action)=>{
             state.allPayments = action?.payload?.allPayments;
-            state.finalMonths - action?.payload?.finalMonths;
-            state.monthlySalesRecord = action?.payload?.monthlySalesRecord
+            state.finalMonths = action?.payload?.finalMonths;
+            state.monthlySalesRecord = action?.payload?.monthlySalesRecord;
         })
      },
 });

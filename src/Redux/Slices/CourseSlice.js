@@ -11,24 +11,22 @@ const initialState = {
 
 //api to get all courses Asynch chronous courses
 export const getAllCourses = createAsyncThunk("/course/get", async () => {
-
-
     try {
-        const response = axiosInstance.get("/courses")
-
-        toast.promise(response, {
-            loading: "Loading course Data",
-            success: "Courses Loaded SUccessfully",
-            error: "Failed to get courses"
-        })
-        // response = await response
-        // return response.data.courses;
-        return (await response).data
-
+      const res = axiosInstance.get("/courses");
+  
+      toast.promise(res, {
+        loading: "Loading courses data...",
+        success: "Courses loaded successfully",
+        error: "Failed to get courses",
+      });
+  
+      const response = await res;
+  
+      return response.data.courses;
     } catch (error) {
-        toast.error(error?.responses?.data?.message)
+      toast.error(error?.response?.data?.message);
     }
-})
+  });
 export const createNewCourse = createAsyncThunk("/course/create", async (data) => {
 
     try {
@@ -43,7 +41,7 @@ export const createNewCourse = createAsyncThunk("/course/create", async (data) =
 
         toast.promise(response, {
             loading: "Creating new Course",
-            success:"Course created successfully",
+            success: "Course created successfully",
             error: "Failed to create course"
         })
 
@@ -57,19 +55,21 @@ export const createNewCourse = createAsyncThunk("/course/create", async (data) =
 
 
 const courseSlice = createSlice({
-    name: "courses",
+    name: "course",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getAllCourses.fulfilled, (state, action) => {
             if (action.payload) {
-
-                state.courseData = [...action.payload]
+                state.coursesData = [...action.payload];
             }
-        })
-
-
-    }
+        });
+    },
 });
 
+
+
+
+
+export const {} = courseSlice.actions;
 export default courseSlice.reducer;
