@@ -12,10 +12,11 @@ import Denied from "./Pages/Denied";
 import HomePage from "./Pages/HomePage";
 import Login from './Pages/Login';
 import Notfound from "./Pages/Notfound";
-import Signup from "./Pages/Signup";
-import Profile from './Pages/User/Profile';
-import EditProfile from "./Pages/User/EditProfile";
 import CheckOut from "./Pages/Payment/Checkout";
+import CheckoutSuccess from "./Pages/Payment/CheckoutSuccess";
+import Signup from "./Pages/Signup";
+import EditProfile from "./Pages/User/EditProfile";
+import Profile from './Pages/User/Profile';
 function App() {
   return (
     //using layout
@@ -44,6 +45,8 @@ function App() {
           <Route path="/user/profile" element={<Profile/>}/>
           <Route path="/user/editprofile" element={<EditProfile />} />
           <Route path="/checkout" element= {<CheckOut/>}/>
+          <Route path="/checkout/success" element= {<CheckoutSuccess/>}/>
+          {/* <Route path="/checkout" element= {<CheckOut/>}/> */}
         </Route>
 
         <Route path="/denied" element={<Denied />} />

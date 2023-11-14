@@ -7,67 +7,68 @@ import { useNavigate } from 'react-router-dom';
 import HomeLayout from '../../Layouts/HomeLayout';
 import { getRazorPayId, purchaseCourseBundle, verifyUserPayment } from '../../Redux/Slices/RazorPaySlice';
 
-function CheckOut() {
-    const dispatch =  useDispatch()
-    const navigate = useNavigate()
-    const razorpayKey = useSelector((state) => state?.razorpayKey?.key)
-    const subscription_id = useSelector((state) => state?.razorpayKey?.subscription_id);
-    const isPaymentVerified  = useSelector((state) => state?.razorpayKey?.isPaymentVerified);
-    const userData = useSelector((state) => state?.auth?.data)
+
+
+
+
+
+
+
+// for storing the payment details after successfull transaction
+
+function Checkout() {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const razorpayKey = useSelector((state) => state?.razorpay?.key);
+    const subscription_id = useSelector((state) => state?.razorpay?.subscription_id);
+    const isPaymentVerified = useSelector((state) => state?.razorpay?.isPaymentVerified);
+    const userData = useSelector((state) => state?.auth?.data);
     const paymentDetails = {
-                razorpay_payments_id : "",
-                razorpay_subscription_id : "",
-                razorpay_signature: ""
+        razorpay_payment_id: "",
+        razorpay_subscription_id: "",
+        razorpay_signature: ""
     }
 
-    async function handleSubscription(e){
-        e.preventDefault()
-        if(!razorpayKey || !subscription_id){
-            toast.error("Something wen wrong")
+    async function handleSubscription(e) {
+        e.preventDefault();
+        if(!razorpayKey || !subscription_id) {
+            toast.error("Something went wrong");
             return;
         }
         const options = {
             key: razorpayKey,
             subscription_id: subscription_id,
-            name: "Coursify Pvt. Ltd",
+            name: "Coursify Pvt. Ltd.",
             description: "Subscription",
-
             theme: {
-                color: '#F37254',
-
+                color: '#F37254'
             },
-            prefill: {
-                email: userData.email,
-                name: userData.fullName
-            },
-            handler: async function(response){
-                paymentDetails.razorpay_payments_id = response.razorpay_payments_id
-                paymentDetails.razorpay_signature = response.razorpay_signature
-                paymentDetails.razorpay_subscription_id = response.subscription_id
-                
-                toast.success("payment Successfull")
 
-                await dispatch(verifyUserPayment(paymentDetails))
-                // console.log(response)
+            handler: async function (response) {
+                paymentDetails.razorpay_payment_id = response.razorpay_payment_id;
+                paymentDetails.razorpay_signature = response.razorpay_signature;
+                paymentDetails.razorpay_subscription_id = response.razorpay_subscription_id;
 
-                isPaymentVerified ? navigate("/checkout/success") : navigate("/checkout/fail")
+                toast.success("Payment successfull");
 
+                const res = await dispatch(verifyUserPayment(paymentDetails));
+                res?.payload?.success ? navigate("/checkout/success") : navigate("/checkout/fail");
             }
         }
-
-        const paymentObject = new window.RazorPay(options)
-        paymentObject.open()
-
-
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
     }
-    async function load(){
-        await dispatch(getRazorPayId()),
-        await dispatch(purchaseCourseBundle())
+
+    async function load() {
+        await dispatch(getRazorPayId());
+        await dispatch(purchaseCourseBundle());
     }
-    useEffect(()=>{
+
+    useEffect(() => {
         load();
-    },[])
-
+    }, []);
+ 
     return(
         <HomeLayout>
             <form 
@@ -79,6 +80,7 @@ function CheckOut() {
 
                     <div className= 'px-4 space-y-5 text-center '>
                         <p className="text-[17px]">
+
                             This purchase will allow you to access all available course
                             <span className='text-yellow-500 font-bold'>
                                 <br/>
@@ -117,4 +119,4 @@ function CheckOut() {
 
 
 
-export default CheckOut ;
+export default Checkout ;
