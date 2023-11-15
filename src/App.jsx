@@ -18,6 +18,7 @@ import CheckOutFailure from "./Pages/Payment/PaymentFailure";
 import Signup from "./Pages/Signup";
 import EditProfile from "./Pages/User/EditProfile";
 import Profile from './Pages/User/Profile';
+import DisplayLectures from "./Pages/Dashboard/DisplayLecture";
 function App() {
   return (
     //using layout
@@ -52,6 +53,8 @@ function App() {
 
         <Route path="/denied" element={<Denied />} />
         <Route path="*" element={<Notfound />} />
+
+        <Route path = '/course/displaylectures' element={<DisplayLectures/>}/>
 
       </Routes>
     </>
