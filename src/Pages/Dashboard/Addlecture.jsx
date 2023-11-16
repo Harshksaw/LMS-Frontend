@@ -35,7 +35,7 @@ function AddLecture() {
         console.log(source)
         setUserInput({
             ...userInput,
-            [name]: value,
+            lecture: video,
             videoSrc: source
         })
     }
