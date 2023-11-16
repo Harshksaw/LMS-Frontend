@@ -8,6 +8,8 @@ import Contact from "./Pages/Contact";
 import CourseDescription from "./Pages/Course/CourseDescription";
 import CourseList from "./Pages/Course/CourseList";
 import CreateCourse from './Pages/Course/CreateCourse';
+import AddLecture from "./Pages/Dashboard/Addlecture";
+import DisplayLectures from "./Pages/Dashboard/DisplayLecture";
 import Denied from "./Pages/Denied";
 import HomePage from "./Pages/HomePage";
 import Login from './Pages/Login';
@@ -18,7 +20,6 @@ import CheckOutFailure from "./Pages/Payment/PaymentFailure";
 import Signup from "./Pages/Signup";
 import EditProfile from "./Pages/User/EditProfile";
 import Profile from './Pages/User/Profile';
-import DisplayLectures from "./Pages/Dashboard/DisplayLecture";
 function App() {
   return (
     //using layout
@@ -40,6 +41,7 @@ function App() {
         <Route element={<RequireAuth allowedRoles={['ADMIN']} />}>
 
           <Route path="/course/create" element={<CreateCourse />} />
+          <Route path = '/course/addlecture'  element= {<AddLecture/>}/>
         </Route>
         {/* AUTH wrapper */}
         <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} /> } >
