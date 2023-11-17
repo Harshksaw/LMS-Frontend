@@ -10,23 +10,40 @@ const initialState = {
 }
 
 //api to get all courses Asynch chronous courses
-export const getAllCourses = createAsyncThunk("/course/get", async () => {
+export const getAllCourses = createAsyncThunk("/course/delete", async () => {
     try {
-      const res = axiosInstance.get("/courses");
-  
-      toast.promise(res, {
-        loading: "Loading courses data...",
-        success: "Courses loaded successfully",
-        error: "Failed to get courses",
-      });
-  
-      const response = await res;
-  
-      return response.data.courses;
+        const res = axiosInstance.get("/courses");
+
+        toast.promise(res, {
+            loading: "Loading courses data...",
+            success: "Courses loaded successfully",
+            error: "Failed to get courses",
+        });
+
+        const response = await res;
+
+        return response.data.courses;
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+        toast.error(error?.response?.data?.message);
     }
-  });
+});
+export const deleteCourse = createAsyncThunk("/course/get", async (id) => {
+    try {
+        const res = axiosInstance.delete(`/courses/${id}`);
+
+        toast.promise(res, {
+            loading: "deleting data...",
+            success: "Courses deleted successfully",
+            error: "Failed to delete courses",
+        });
+
+        const response = await res;
+
+        return response.data.courses;
+    } catch (error) {
+        toast.error(error?.response?.data?.message);
+    }
+});
 export const createNewCourse = createAsyncThunk("/course/create", async (data) => {
 
     try {
