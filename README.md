@@ -1,85 +1,93 @@
-#LMS Fontend
+# LMS Frontend
 
-### Setup Instruction
+### Setup instructions
 
-...
-1.    git clone https://github.com/Harshksaw/LMS-Frontend.git
-
-...
+1. Clone the project
 
 ```
-2.    Move into the Directory
-       cd LMS-Frontend 
+    git clone https://github.com/singhsanket143/lms-frontend-en.git
 ```
 
+2. Move into the directory
+
 ```
-3.  Install Dependency ->
+    cd lms-frontend-en
+```
+
+3. Install dependencies
+
+```
     npm i
 ```
 
+4. Run the server
 ```
-4. run the server -> 
     npm run dev
 ```
 
-### Setup Instruction for tailwind
 
- visit -> [(https://tailwindcss.com/docs/installation)]
- 1. Install tailwind css
+### How to setup taildinw in your project [Link](https://tailwindcss.com/docs/guides/vite)
 
- ```
-    npm install -D tailwindcss | postcss autoprefixer
- ```
- ```
-    Config ->
-    npx tailwindcss init
- ```
+1. Install tailwind and other dependencies
+```
+    npm install -D tailwindcss postcss autoprefixer
+```
 
- 
- ```
- Add tailwind file entension-> in tailwind.config.js->
-   content: ["./index.html", "./src/**/*.{html,js}"],
+2. Create the `tailwind.config.js` file
+```
+    npx tailwindcss init -p
+```
 
- ```
+3. Add the files and extensions to tailwind config in the content property
+```
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+```
 
- ```
-4. add the tailwind directives at the top of the 'indexcss'
+4. Add the tailwind directives on the top of index.css file
+```
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+```
 
- npx tailwindcss init -p
+5. Then run the server, tailwind should be integrated....
 
- and add Daisui 
- npm i -D daisyui@latest
 
- ```
+### Adding plugins and dependencies
 
- ### Adding Plugins and dependencies
+```
+    npm install @reduxjs/toolkit react-redux react-router-dom react-icons react-chartjs-2 chart.js daisyui axios react-hot-toast @tailwindcss/line-clamp
+```
 
- ```
-  install dependecies ->
-  ╰─ npm i @reduxjs/toolkit react-redux react-router-dom react-icons react-chartjs-2 chart.js daisyui axios react-hot-toast @tailwindcss/line-clamp
+### Adding auto import sort for esline
 
- ```
+1. Install the plugin
 
-###Configure auto import sort esline
+```
+    npm i eslint-plugin-simple-import-sort
+```
 
- ```
-  1. import eslint simple import
-   npm i -D eslint-plugin-simple-import-sort
- ```
- 2. Add rule in `eslint.cjs`
- 3. add plugin 
- ```
- [..., 'simple-import-sort]
- ```
+2. Add rule in `.eslintrc.cjs`
 
- 4. To Enable auto import sort on file save in vscode
- ```
- -open `settings.json`
- -add the folling config
+```
+    'simple-import-sort/imports': 'error',
+```
 
-     plugins: ['react-refresh', 'simple-import-sort'],
-  rules: {
-    'simple-import-sort/imports' : 'errors', 
-    'react-refresh/only-export-components': [
-      'warn',
- ```
+3. Add simple-import-sort in the plugin array of `.eslintrc.cjs` file
+
+```
+    plugins: [..., 'simple-import-sort']
+```
+
+4. Open settings.json in vscode configuration settings
+
+5. Add the following line
+
+```
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true 
+    }
+```
