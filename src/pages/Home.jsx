@@ -1,39 +1,28 @@
-import { Link } from "react-router-dom";
+import { FaArrowRight } from "react-icons/fa"                                  // Icons Import
+import { Link } from "react-router-dom"
+import Banner from "../assets/Images/banner.mp4"   
+const Home = ()=>{
+    return(
+        <div>
+            <div>
 
-import homePageMainImage from '../assets/Images/homePageMainImage.png';
-import HomeLayout from "../layouts/HomeLayout";
-function Home() {
+            <Link to={"/signup"}>                                                       
+            <div className = 'group mx-auto mt-16 w-fit rounded-full bg-richblack-800 p-1 font-bold text-richblack-200 drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] transition-all duration-200 hover:scale-95 hover:drop-shadow-none'>
+               <div className = "flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-richblack-900">
+                    <p>Become an Instructor</p>
+                    <FaArrowRight />                                                     {/* Put group in the parent element and group-hover: in all those child elements where we want the style on hover so when we hover on any space under parent then */}  
+                </div>                                                                   {/* all child which contain group-hover: get styled  , for more detail see notes in public */} 
+            </div>
+        </Link>
 
-    return (
-        <HomeLayout>
-            <div className="pt-10 text-white flex items-center justify-center gap-10 mx-16 h-[90vh]">
-                <div className="w-1/2 space-y-6">
-                    <h1 className="text-5xl font-semibold">Find out best <span className="text-yellow-500 font-bold">Online courses</span></h1>
-                    <p className="text-xl text-gray-200">
-                        We have a large library of courses taught by highly skilled and qualified faculties at a very affordable cose.
-                    </p>
-
-                    <div className="space-x-6">
-                        <Link to="/courses" >
-                            <button className="bg-yellow-500 px-5 py-3 rounded-md font-semibold text-lg cursor-pointer hover:bg-yellow-600 transition-all ease-in-out duration-300">
-                                Explore courses
-                            </button>
-                        </Link>
-                        <Link to="/contacts" >
-                            <button className="border border-yellow-500 px-5 py-3 rounded-md font-semibold text-lg cursor-pointer hover:bg-yellow-600 transition-all ease-in-out duration-300">
-                                Contact Us
-                            </button>
-                        </Link>
-                    </div>
-                </div>
-                
-                <div className="w-1/2 flex items-center justify-center">
-                    <img src={homePageMainImage} alt="home page" />
-                </div>
 
             </div>
-        </HomeLayout>
+            </div>
+
+
+
+
+    </div>
     )
 }
-
 export default Home;
