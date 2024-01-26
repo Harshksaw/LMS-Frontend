@@ -1,11 +1,16 @@
-import React from 'react'
+
+import PropTypes from 'prop-types';
 
 const HighlightText = ({text}) => {
   return (
-    <span className="bg-gradient-to-b from-yellow-300 to-yellow-500 text-transparent bg-clip-text font-bold">
+    <span className="bg-gradient-to-r from-[#2b1aed] to-yellow-400 text-transparent bg-clip-text font-bold">
         {" "} {text}
     </span> 
   );
+};
+
+HighlightText.propTypes = {
+  text: PropTypes.string.isRequired,
 };
 
 export default HighlightText
