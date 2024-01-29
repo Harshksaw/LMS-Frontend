@@ -8,7 +8,7 @@ import { useSelector } from "react-redux"
 import { AiOutlineShoppingCart } from "react-icons/ai"
 import ProfileDropdown from "../core/Auth/ProfileDropDown"
 import { useEffect, useState } from "react"
-import { apiConnector } from "../../services/apliconnector"
+import { apiConnector } from "../../services/apiconnector"
 import { categories } from "../../services/api"
 //fetchin states
 
