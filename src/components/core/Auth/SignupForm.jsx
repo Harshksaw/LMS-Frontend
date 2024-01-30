@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 
 import { sendOtp } from "../../../services/operations/authAPI"
 import { setSignupData } from "../../../slices/authSlice"
-// import { ACCOUNT_TYPE } from "../../../utils/constants"
+import { ACCOUNT_TYPE } from "../../../utils/constants"
 import Tab from "../../common/Tab"
 
 
@@ -17,7 +17,7 @@ function SignupForm() {
   const dispatch = useDispatch()
 
   // student or instructor
-  // const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
+  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -41,11 +41,11 @@ function SignupForm() {
   function handleOnSubmit(e){
     e.preventDefault();
     if(password !== confirmPassword) {toast.error("Passwords do not match");  return ; }
-    // const signupData = { ...formData , accountType};
-    // dispatch(setSignupData(signupData))                                    // Setting signup data to state To be used after otp verification
+    const signupData = { ...formData , accountType};
+    dispatch(setSignupData(signupData))                                    // Setting signup data to state To be used after otp verification
     dispatch(sendOtp(formData.email, navigate))                           // Send OTP to user for verification
     setFormData({firstName: "", lastName: "",  email: "",  password: "",  confirmPassword: "",})           // Reset
-    // setAccountType(ACCOUNT_TYPE.STUDENT)
+    setAccountType(ACCOUNT_TYPE.STUDENT)
   }
 
 
@@ -54,12 +54,12 @@ function SignupForm() {
     {
       id: 1,
       tabName: "Student",
-      // type: ACCOUNT_TYPE.STUDENT,
+      type: ACCOUNT_TYPE.STUDENT,
     },
     {
       id: 2,
       tabName: "Instructor",
-      // type: ACCOUNT_TYPE.INSTRUCTOR,
+      type: ACCOUNT_TYPE.INSTRUCTOR,
     },
   ]
  
@@ -70,7 +70,7 @@ function SignupForm() {
     <div>
 
       {/* Tab */}
-      {/* <Tab tabData = {tabData} field={accountType} setField={setAccountType} /> */}
+      <Tab tabData = {tabData} field={accountType} setField={setAccountType} />
 
       {/* Form */}
       <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">

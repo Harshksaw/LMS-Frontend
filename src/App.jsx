@@ -11,6 +11,7 @@ import Navbar from "./components/common/Navbar"
 import VerifyEmail from './pages/VerifyEmail'
 import About from './pages/About'
 import UpdatePassword from './pages/UpdatePassword'
+import Contact from "./pages/Contact"
 function App() {
 
 
@@ -35,7 +36,7 @@ function App() {
           <Route path="verify-email" element={<VerifyEmail />} />
           <Route path="update-password/:id" element={<UpdatePassword />} />
           <Route path="about" element={<About />} />
-          {/* <Route path="/contact" element={<Contact />} /> */}
+          <Route path="/contact" element={<Contact />} />
 
         
       </Routes>

@@ -3,7 +3,7 @@ import { setLoading, setToken } from "../../slices/authSlice"
 // import { resetCart } from "../../slices/cartSlice"
 import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiconnector"
-import { endpoints } from "../api"
+import { endpoints } from "../apis"
 
 
 /*
@@ -27,14 +27,13 @@ export function sendOtp(email, navigate) {
     try {
       const response = await apiConnector("POST", SENDOTP_API, {email, checkUserPresent: true,})
       console.log("SENDOTP API RESPONSE............", response)
-    
+
       if(!response.data.success) {
         throw new Error(response.data.message)
       }
       toast.success("OTP Sent Successfully")
       navigate("/verify-email")
-    }
-     catch (error) {
+    } catch (error) {
       console.log("SENDOTP API ERROR............", error)
       toast.error("Could Not Send OTP")
     }

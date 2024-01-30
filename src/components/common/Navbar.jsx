@@ -9,7 +9,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai"
 import ProfileDropdown from "../core/Auth/ProfileDropDown"
 import { useEffect, useState } from "react"
 import { apiConnector } from "../../services/apiconnector"
-import { categories } from "../../services/api"
+import { categories } from "../../services/apis"
 //fetchin states
 
 
