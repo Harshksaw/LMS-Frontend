@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux"
 import { NavLink, matchPath, useLocation } from "react-router-dom"
 
 import { resetCourseState } from "../../../slices/courseSlice"
-export default function SidebardLink({link, iconName}) {
+export default function SidebarLink({link, iconName}) {
 
     const Icon = Icons(iconName);
     const location = useLocation();  //to show active link
@@ -34,7 +34,7 @@ export default function SidebardLink({link, iconName}) {
 
             </span>
             <div className="flex items-center gap-x-2 ">
-                <Icon className="text-xl"/>
+                <Icon className="text-lg"/>
                 <span>{link.title}</span>
 
             </div>
