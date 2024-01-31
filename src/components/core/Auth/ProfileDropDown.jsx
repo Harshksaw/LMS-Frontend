@@ -1,14 +1,14 @@
 import { useRef, useState } from "react"
 import { AiOutlineCaretDown } from "react-icons/ai"
 import { VscDashboard, VscSignOut } from "react-icons/vsc"
-// import { useDispatch, useSelector } from "react-redux"
-// import { Link, useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
 
 
 export default function ProfileDropdown() {
-//   const { user } = useSelector((state) => state.profile)
-//   const dispatch = useDispatch()
-//   const navigate = useNavigate()
+  const { user } = useSelector((state) => state.profile)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
 

@@ -2,10 +2,20 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
 import {Outlet} from 'react-router-dom'
+import Sidebar from '../components/core/Dashboard/Sidebar'
 
- const Dasboard = () => {
+ const Dashboard = () => {
     const {loading: authLoading} = useSelector((state )=> state.auth)
     const { loading: profileLoading } = useSelector((state) => state.profile)
+  const {user} = useSelector((state) => state.profile);
+    if(user === null){
+      return(
+        <div>
+          User is null
+        </div>
+      )
+    }
+
 if(authLoading || profileLoading){
   return(
     <div className='loading'>
@@ -16,7 +26,7 @@ if(authLoading || profileLoading){
 
   return (
     <div className="relative flex min-h-[calc(100vh-3.5rem)]">
-    {/* <Sidebar /> */}
+    <Sidebar />
     <div className="h-[calc(100vh-3.5rem)] flex-1 overflow-auto">
       <div className="mx-auto w-11/12 max-w-[1000px] py-10">
         <Outlet />
@@ -25,4 +35,4 @@ if(authLoading || profileLoading){
   </div>
   )
 }
-export default Dasboard
+export default Dashboard
