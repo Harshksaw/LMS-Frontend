@@ -19,8 +19,15 @@ import PrivateRoute from './components/core/Auth/PrivateRoute'
 import Error from "./pages/Error"
 import Setting from "./components/core/Dashboard/Settings"
 import EnrolledCourses from './components/core/Dashboard/EnrolledCourses'
+import { ACCOUNT_TYPE } from './utils/constants'
+import Cart from './components/core/Dashboard/Cart'
+import { useDispatch, useSelector } from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 
 function App() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const {user} = useSelector((state)=> state.Profile)
 
 
   return (
@@ -52,7 +59,15 @@ function App() {
 
           <Route path="dashboard/my-profile" element={<MyProfile />} />
           <Route path="dashboard/settings" element={<Setting />} />
-          <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
+        
+          {
+            user?.ACCOUNT_TYPE === ACCOUNT_TYPE.STUDENT && (
+              <>
+                <Route path="dashboard/cart" element={<Cart/>} />
+                <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
+              </>
+            )
+          }
         </Route>
 
 
