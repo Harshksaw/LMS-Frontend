@@ -112,7 +112,8 @@ export default function CourseInformationForm() {
         if (
           currentValues.courseRequirements.toString() !==
           course.instructions.toString()
-        ) {
+        ) 
+        {
           formData.append(
             "instructions",
             JSON.stringify(data.courseRequirements)
@@ -150,7 +151,7 @@ export default function CourseInformationForm() {
     formData.append("instructions", JSON.stringify(data.courseRequirements));
     formData.append("status", COURSE_STATUS.DRAFT);
     // formData.append("tag", JSON.stringify(data.courseTags));
-    formData.append("thumbnailImage", data.courseImage);
+    // formData.append("thumbnailImage", data.courseImage);
 
     setLoading(true);
     console.log("BEFORE add course API call");
