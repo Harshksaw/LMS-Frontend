@@ -23,11 +23,12 @@ import { ACCOUNT_TYPE } from './utils/constants'
 import Cart from './components/core/Dashboard/Cart'
 import { useDispatch, useSelector } from 'react-redux'
 import {useNavigate} from 'react-router-dom'
+import AddCourse from './components/core/Dashboard/AddCourse'
 
 function App() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const {user} = useSelector((state)=> state.Profile)
+  const {user} = useSelector((state)=> state.profile)
 
 
   return (
@@ -69,6 +70,7 @@ function App() {
             )
           }
         </Route>
+        <Route path="addcourse" element={<AddCourse />} />
 
 
 
