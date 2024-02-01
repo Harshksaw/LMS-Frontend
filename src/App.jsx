@@ -3,7 +3,7 @@
 import './App.css'
 import { Route, Routes } from "react-router-dom"
 import OpenRoute from "./components/core/Auth/OpenRoute"
-import Signup from "./pages/Signup"
+import Signup from "./pages/SignUp"
 import Login from './pages/Login'
 import ForgotPassword from './pages/ForgotPassword'
 import Home from "./pages/Home"
@@ -70,7 +70,7 @@ function App() {
             )
           }
         </Route>
-        <Route path="addcourse" element={<AddCourse />} />
+        <Route path="add-course" element={<AddCourse />} />
 
 
 
