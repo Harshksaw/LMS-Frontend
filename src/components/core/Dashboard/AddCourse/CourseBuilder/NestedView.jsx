@@ -5,6 +5,8 @@ import { MdEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { RxDropdownMenu } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
+import { deleteSection, deleteSubSection } from "../../../../../services/operations/courseDetailsAPI";
+import { setCourse } from "../../../../../slices/courseSlice";
 
 export default function NestedView({ handleChangeEditSectionName }) {
   const { course } = useSelector((state) => state.course);
@@ -16,10 +18,22 @@ export default function NestedView({ handleChangeEditSectionName }) {
 
   const [viewSubSection, setViewSubSection] = useState(false);
   const [confirmationModal, setConfirmationModal] = useState(null);
-  const handleDeleteSection = (sectionId) => {
+  const handleDeleteSection = async(sectionId) => {
     //delete section
+    const result = await deleteSection({ sectionId, courseId: course._id , token});
+
+    if(result){
+      dispatch(setCourse(result));
+    }
+    setConfirmationModal(null);
   };
-  const handleDeleteSubSection = (subSectionId, sectionId) => {
+  const handleDeleteSubSection = async(subSectionId, sectionId) => {
+    const result = await deleteSubSection({ subSectionId, sectionId, courseId: course._id, token });
+    if(result){
+      dispatch(setCourse(result));
+    }
+    setConfirmationModal(null);
+}
     return (
       <>
         <div
@@ -127,14 +141,30 @@ export default function NestedView({ handleChangeEditSectionName }) {
         </div>
 
         {addSubSection ? (
-          <SubSectionModal />
+          <SubSectionModal 
+          modalData = {addSubSection}
+          setModalData = {setAddSubSection}
+          add = {true}
+          />
         ) : viewSubSection ? (
-          <SubSectionModal />
+          <SubSectionModal
+          modalData = {viewSubSection}
+          />
         ) : editSubSection ? (
           <SubSectionModal />
         ) : (
           <div></div>
         )}
+        {
+            confirmationModal ? (
+                <ConfirmationModal
+                modalData = {confirmationModal}
+                setModalData = {setConfirmationModal}
+                />
+            ) : (
+                <div></div>
+            )
+        }
       </>
     );
   };
