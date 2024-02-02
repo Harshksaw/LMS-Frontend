@@ -19,7 +19,48 @@ export default function PublishCourse() {
 
   useEffect(() => {
 
+    if(course?.status === COURSE_STATUS.PUBLISHED){
+      setValue("public", true)
+    }
+
   },[])
+const goToCourses = ()=>{
+    dispatch(resetCourseState())
+}
+
+
+const handleCoursePublish = async () => {
+    if(course?.status === COURSE_STATUS.PUBLISHED && getValues("public") === true
+    || (course.status === COURSE_STATUS.DRAFT && getValues("public") === false)){
+
+        goToCourses();
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("courseId", course._id);
+    const courseStatus = getValues("public") ? COURSE_STATUS.PUBLISHED : COURSE_STATUS.DRAFT;
+    formData.append("status", courseStatus);
+
+    setLoading(true);
+    //apicall 
+
+    const result = await editCourseDetails(formData, token);
+
+    if(result){
+        goToCourses();
+    }
+    setLoading(false);
+}
+
+  const onSubmit= ()=>{
+    handleCoursePublish()
+  }
+
+
+  const goBack = () => {
+    dispatch(setStep(2));
+  }
 
 
 
@@ -27,9 +68,6 @@ export default function PublishCourse() {
 
 
 
-
-
-  
 
   return (
     <div className="rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6">
@@ -62,7 +100,7 @@ export default function PublishCourse() {
           >
             Back
           </button>
-          {/* <IconBtn disabled={loading} text="Save Changes" /> */}
+          <IconBtn disabled={loading} text="Save Changes" />
           <button className="bg-yellow-50 font-semibold px-3 py-2 rounded-md">Save Changes</button>
         </div>
       </form>
