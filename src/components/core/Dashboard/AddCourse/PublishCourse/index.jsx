@@ -26,6 +26,7 @@ export default function PublishCourse() {
   },[])
 const goToCourses = ()=>{
     dispatch(resetCourseState())
+    navigate("/dashboard/courses")
 }
 
 
