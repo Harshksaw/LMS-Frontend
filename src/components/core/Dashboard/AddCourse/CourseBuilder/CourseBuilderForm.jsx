@@ -86,6 +86,7 @@ export default function CourseBuilderForm() {
 
 
   }
+  
   const handleChangeSectionName = (sectionId, sectionName) => {
 
     if(editSectionName === sectionId){
