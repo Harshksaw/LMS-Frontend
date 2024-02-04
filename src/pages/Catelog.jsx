@@ -31,7 +31,7 @@ export default function Catelog() {
     useEffect(() => {
         const getCategoryDetails = async () => {
             try {
-                const res = await getCategoryDetails(categoryId)
+                const res = await getCategoryDetails(new moongose.Types.Obje)
                 setCatelogPageData(res);
 
             } catch (error) {
