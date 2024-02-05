@@ -23,9 +23,17 @@ import Error from "./Error"
 
 function CourseDetails(){
 
+  const {user}  = useSelector((state)=> state.profile);
+  const {token} = useSelector((state)=> state.auth);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const courseId = useParams();
+  
+
     const handleBuyCourse=()=>{
         if(token){
-            buyCourse()
+            buyCourse(token, [courseId], user, navigate,dispatch)
             return;
         }
     }
