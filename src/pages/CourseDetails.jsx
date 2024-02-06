@@ -8,8 +8,8 @@ import { useNavigate, useParams } from "react-router-dom"
 import ConfirmationModal from "../components/common/ConfirmationModal"
 import Footer from "../components/common/Footer"
 import RatingStars from "../components/common/RatingStars"
-// import CourseAccordionBar from "../components/core/Course/CourseAccordianBar"
-// import CourseDetailsCard from "../components/core/Course/CourseDetailsCard"
+import CourseAccordionBar from "../components/core/Course/CourseAccordianBar"
+import CourseDetailsCard from "../components/core/Course/CourseDetailsCard"
 import { formatDate } from "../services/formatDate"
 import { fetchCourseDetails } from "../services/operations/courseDetailsAPI"
 import { buyCourse } from "../services/operations/studentFeaturesAPI"
@@ -28,12 +28,12 @@ function CourseDetails() {
   const { courseId } = useParams()
   // console.log(`course id: ${courseId}`)
 
-  // Declear a state to save the course details
+  // Decleare a state to save the course details
   const [response, setResponse] = useState(null)
   const [confirmationModal, setConfirmationModal] = useState(null)
   useEffect(() => {
     // Calling fetchCourseDetails fucntion to fetch the details
-    ;(async () => {
+    (async () => {
       try {
         const res = await fetchCourseDetails(courseId)
         // console.log("course details res: ", res)
@@ -52,7 +52,7 @@ function CourseDetails() {
     const count = GetAvgRating(response?.data?.courseDetails.ratingAndReviews)
     setAvgReviewCount(count)
   }, [response])
-  // console.log("avgReviewCount: ", avgReviewCount)
+  console.log("avgReviewCount: ", avgReviewCount)
 
   // // Collapse all
   // const [collapse, setCollapse] = useState("")
