@@ -157,7 +157,18 @@ const VideoDetails = () => {
   };
 
   const handleLectureCompletion = async () => {
-   
+   setLoading(true);
+    const response = await markLectureAsComplete(
+      token,
+      courseId,
+      sectionId,
+      subSectionId
+    );
+    if (response.status === 200) {
+      dispatch(updateCompletedLectures(subSectionId));
+    }
+
+   setLoading(false);
   };
 
   return (
