@@ -28,6 +28,8 @@ import MyCourses from './components/core/Dashboard/MyCourses'
 import EditCourse from './components/core/Dashboard/EditCourse'
 import Catalog from "./pages/Catalog"
 import ViewCourse from './pages/ViewCourse'
+import Settings from './components/core/Dashboard/Settings'
+import Scroll_To_Top_Button from './utils/Scroll_To_Top_Button'
 
 function App() {
   const dispatch = useDispatch()
@@ -36,87 +38,131 @@ function App() {
 
 
   return (
-    <div className='w-screen min-h-screen bg-richblack-900 flex flex-col font-inter'>
-      <Navbar />
-      <Routes>
-
-        <Route path="/" element={<Home />} />
-        <Route path="catalog/:catalogName" element={<Catalog/>} />
-        {/* <Route path="courses/:courseId" element={<CourseDetails/>} /> */}
-        <Route path="signup" element={<OpenRoute> <Signup /> </OpenRoute>} />
-        <Route path="login" element={<OpenRoute> <Login /> </OpenRoute>} />
-        <Route path="forgot-password" element={<OpenRoute> <ForgotPassword /> </OpenRoute>} />
-        <Route path="verify-email" element={<OpenRoute> <VerifyEmail /> </OpenRoute>} />
-        <Route path="update-password/:id" element={<OpenRoute> <UpdatePassword /> </OpenRoute>} />
-        <Route path="about" element={<OpenRoute> <About /> </OpenRoute>} />
-        <Route path="/contact" element={<Contact />} />
-
-
-
-        <Route
-
+    <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter relative">
+    <Navbar/>
+    <Routes>
+      <Route path="/" element={<Home/>} />
+      <Route path="catalog/:catalogName" element={<Catalog/>} />
+      {/* <Route path="courses/:courseId" element={<CourseDetails/>} /> */}
+      
+      <Route
+          path="signup"
           element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
+            <OpenRoute>
+              <Signup />
+            </OpenRoute>
           }
-        >
+        />
+    <Route
+          path="login"
+          element={
+            <OpenRoute>
+              <Login />
+            </OpenRoute>
+          }
+        />
 
-          {/* <Route path="dashboard/my-profile" element={<MyProfile />} /> */}
-          {/* <Route path="dashboard/settings" element={<Setting />} /> */}
-        
-          {
-            user?.ACCOUNT_TYPE === ACCOUNT_TYPE.STUDENT && (
-              <>
-                {/* <Route path="dashboard/cart" element={<Cart/>} /> */}
-                {/* <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} /> */}
-              </>
-            )
+    <Route
+          path="forgot-password"
+          element={
+            <OpenRoute>
+              <ForgotPassword />
+            </OpenRoute>
           }
-        {/* <Route path="dashboard/add-course" element={<AddCourse />} /> */}
-        </Route>
-        {
+        />  
+
+      <Route
+          path="verify-email"
+          element={
+            <OpenRoute>
+              <VerifyEmail />
+            </OpenRoute>
+          }
+        />  
+
+    <Route
+          path="update-password/:id"
+          element={
+            <OpenRoute>
+              <UpdatePassword />
+            </OpenRoute>
+          }
+        />  
+
+    <Route
+          path="/about"
+          element={
+            
+              <About />
+            
+          }
+        />
+    <Route path="/contact" element={<Contact />} />
+
+    <Route 
+      element={
+        <PrivateRoute>
+          <Dashboard />
+        </PrivateRoute>
+      }
+    >
+      <Route path="dashboard/my-profile" element={<MyProfile />} />
+      
+      <Route path="dashboard/Settings" element={<Settings />} />
+      
+
+      {
+        user?.accountType === ACCOUNT_TYPE.STUDENT && (
+          <>
+          <Route path="dashboard/cart" element={<Cart />} />
+          {/* <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} /> */}
+          </>
+        )
+      }
+
+      {
         user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
           <>
-             {/* <Route path="add-course" element={<AddCourse />} /> */}
           {/* <Route path="dashboard/instructor" element={<Instructor />} /> */}
           <Route path="dashboard/add-course" element={<AddCourse />} />
           <Route path="dashboard/my-courses" element={<MyCourses />} />
-          {/* <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} /> */}
+          <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} />
           
           </>
         )
-        }
+      }
 
-        <Route element={
-          <PrivateRoute>
-          <ViewCourse/>
-          </PrivateRoute>
-        }>
-        {
-          user?.accountType === ACCOUNT_TYPE.STUDENT && (
-            <>
-         <Route 
+
+    </Route>
+
+    
+      <Route element={
+        <PrivateRoute>
+          <ViewCourse />
+        </PrivateRoute>
+      }>
+
+      {
+        user?.accountType === ACCOUNT_TYPE.STUDENT && (
+          <>
+          <Route 
             path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
-            element={<VideoDetails />}
+            element={<VideoDetails/>}
           />
+          </>
+        )
+      }
 
-            </>
-          )
-
-        }
-        </Route>
-
-
-       
+      </Route>
 
 
 
-        <Route path='*'  element={<Error/>} />
+    <Route path="*" element={<Error />} />
 
-      </Routes>
 
-    </div>
+    </Routes>
+    <Scroll_To_Top_Button/>
+   </div>
   )
 }
 

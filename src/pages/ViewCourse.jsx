@@ -31,8 +31,9 @@ export default function ViewCourse() {
             dispatch(setTotalNoOfLectures(lectures));
 
         }
-
+        setCourseSpecificDetails()
     },[])
+
 
   return (
     <>
