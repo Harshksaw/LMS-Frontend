@@ -12,7 +12,7 @@ import "../../App.css"
 // Icons
 import { FaStar } from "react-icons/fa"
 // Import required modules
-import { Autoplay, FreeMode, Pagination } from "swiper"
+// import { Autoplay, FreeMode, Pagination } from "swiper"
 
 // Get apiFunction and the endpoint
 import { apiConnector } from "../../services/apiconnector"
@@ -53,7 +53,7 @@ function ReviewSlider() {
           delay: 2500,
           disableOnInteraction: false,
         }}
-        modules={[FreeMode, Pagination, Autoplay]}
+        // modules={[FreeMode, Pagination, Autoplay]}
         className="w-full "
       >
          {reviews.map((review, i) => {
