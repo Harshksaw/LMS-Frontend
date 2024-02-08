@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import { fetchInstructorCourses } from '../../../../services/operations/courseDetailsAPI';
+import { getInstructorData } from '../../../../services/operations/profileAPI';
+import { Link } from 'react-router-dom';
+import InstructorChart from './InstructorChart';
 
 export default function Instructor() {
     const {token} = useSelector(state => state.auth)
     const [loading, setLoading] = useState(true);
     const [instructorData, setInstructorData] = useState([]);
     const [courses, setCourses] = useState([]);
+    const {user} = useSelector(state => state.profile);
 
     useEffect(() => {
         const getCourseDataWithStats = async () => {
@@ -49,7 +54,7 @@ export default function Instructor() {
             <div className="my-4 flex md:flex-row flex-col h-[600px] md:h-[450px] md:space-x-4 ">
               {/* Render chart / graph */}
               {totalAmount > 0 || totalStudents > 0 ? (
-                <InstructorChart courses={instructorData} />
+                <InstructorChart courses={courses} />
               ) : (
                 <div className="flex-1 rounded-md bg-richblack-800 p-6">
                   <p className="text-lg font-bold text-richblack-5">Visualize</p>
@@ -58,6 +63,7 @@ export default function Instructor() {
                   </p>
                 </div>
               )}
+
               {/* Total Statistics */}
               <div className="flex md:mt-0 mx-auto mt-6 min-w-[300px] flex-col rounded-md bg-richblack-800 p-6">
                 <p className="text-lg font-bold text-richblack-5">Statistics</p>
