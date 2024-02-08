@@ -42,12 +42,12 @@ export default function Sidebar() {
               >
                 <AiOutlineDoubleLeft className="text-yellow-50 text-4xl" />
               </div>
-
-              {sidebarLinks.map((link)=>{
-                console.log(link.type, user?.accountType)
-                        // if (link.type && user?.accountType !== link.type) return null;
-                        return <SidebarLink key={link.id} link={link} iconName = {link.icon}/>
-                        })}
+              {sidebarLinks.map((link) => {
+                if (link.type && user?.accountType !== link.type) return null;
+                return (
+                  <SidebarLink key={link.id} link={link} iconName={link.icon} />
+                );
+              })}
             </div>
             <div className="mx-auto mt-6 mb-6 h-[1px] w-10/12 bg-richblack-700" />
             <div className="flex flex-col">

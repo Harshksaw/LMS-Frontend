@@ -31,7 +31,6 @@ export default function RenderCartCourses() {
                 {course?.category?.name}
               </p>
               <div className="flex items-center gap-2">
-                
                 <span className="text-yellow-5">4.5</span>
                 <ReactStars
                   count={5}

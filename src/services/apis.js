@@ -1,12 +1,6 @@
+const BASE_URL = process.env.REACT_APP_BASE_URL
 
-
-// const BASE_URL = "https://studywithmentor.onrender.com/api/v1"
-const BASE_URL="http://localhost:4000/api/v1"
-export const categories = {
-    CATEGORIES_API: BASE_URL + '/course/showAllCategories',
-}
-
-// / AUTH ENDPOINTS
+// AUTH ENDPOINTS
 export const endpoints = {
   SENDOTP_API: BASE_URL + "/auth/sendotp",
   SIGNUP_API: BASE_URL + "/auth/signup",
@@ -56,9 +50,9 @@ export const ratingsEndpoints = {
 }
 
 // CATAGORIES API
-// export const categories = {
-//   CATEGORIES_API: BASE_URL + "/course/showAllCategories",
-// } 
+export const categories = {
+  CATEGORIES_API: BASE_URL + "/course/showAllCategories",
+}
 
 // CATALOG PAGE DATA
 export const catalogData = {

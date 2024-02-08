@@ -18,57 +18,50 @@ export default function PublishCourse() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-
-    if(course?.status === COURSE_STATUS.PUBLISHED){
+    if (course?.status === COURSE_STATUS.PUBLISHED) {
       setValue("public", true)
     }
-
-  },[])
-const goToCourses = ()=>{
-    dispatch(resetCourseState())
-    navigate("/dashboard/courses")
-}
-
-
-const handleCoursePublish = async () => {
-    if(course?.status === COURSE_STATUS.PUBLISHED && getValues("public") === true
-    || (course.status === COURSE_STATUS.DRAFT && getValues("public") === false)){
-
-        goToCourses();
-        return;
-    }
-
-    const formData = new FormData();
-    formData.append("courseId", course._id);
-    const courseStatus = getValues("public") ? COURSE_STATUS.PUBLISHED : COURSE_STATUS.DRAFT;
-    formData.append("status", courseStatus);
-
-    setLoading(true);
-    //apicall 
-
-    const result = await editCourseDetails(formData, token);
-
-    if(result){
-        goToCourses();
-    }
-    setLoading(false);
-}
-
-  const onSubmit= ()=>{
-    handleCoursePublish()
-  }
-
+  }, [])
 
   const goBack = () => {
-    dispatch(setStep(2));
+    dispatch(setStep(2))
   }
 
+  const goToCourses = () => {
+    dispatch(resetCourseState())
+    navigate("/dashboard/my-courses")
+  }
 
+  const handleCoursePublish = async () => {
+    // check if form has been updated or not
+    if (
+      (course?.status === COURSE_STATUS.PUBLISHED &&
+        getValues("public") === true) ||
+      (course?.status === COURSE_STATUS.DRAFT && getValues("public") === false)
+    ) {
+      // form has not been updated
+      // no need to make api call
+      goToCourses()
+      return
+    }
+    const formData = new FormData()
+    formData.append("courseId", course._id)
+    const courseStatus = getValues("public")
+      ? COURSE_STATUS.PUBLISHED
+      : COURSE_STATUS.DRAFT
+    formData.append("status", courseStatus)
+    setLoading(true)
+    const result = await editCourseDetails(formData, token)
+    if (result) {
+      goToCourses()
+    }
+    setLoading(false)
+  }
 
-
-
-
-
+  const onSubmit = (data) => {
+    // console.log(data)
+    handleCoursePublish()
+  }
 
   return (
     <div className="rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6">
@@ -101,7 +94,7 @@ const handleCoursePublish = async () => {
           >
             Back
           </button>
-          <IconBtn disabled={loading} text="Save Changes" />
+          {/* <IconBtn disabled={loading} text="Save Changes" /> */}
           <button className="bg-yellow-50 font-semibold px-3 py-2 rounded-md">Save Changes</button>
         </div>
       </form>

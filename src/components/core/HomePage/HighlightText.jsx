@@ -1,16 +1,12 @@
-
-import PropTypes from 'prop-types';
+import React from "react";
 
 const HighlightText = ({text}) => {
   return (
-    <span className="bg-gradient-to-r from-[#2b1aed] to-yellow-400 text-transparent bg-clip-text font-bold">
-        {" "} {text}
-    </span> 
+    <span className="bg-gradient-to-b from-[#1FA2FF] via-[#12D8FA] to-[#A6FFCB] text-transparent bg-clip-text font-bold">
+      {" "}
+      {text}
+    </span>
   );
 };
 
-HighlightText.propTypes = {
-  text: PropTypes.string.isRequired,
-};
-
-export default HighlightText
+export default HighlightText;

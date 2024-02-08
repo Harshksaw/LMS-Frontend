@@ -8,39 +8,37 @@ import {
 } from "../../../../services/operations/courseDetailsAPI"
 import { setCourse, setEditCourse } from "../../../../slices/courseSlice"
 import RenderSteps from "../AddCourse/RenderSteps"
+
 export default function EditCourse() {
+  const dispatch = useDispatch()
+  const { courseId } = useParams()
+  const { course } = useSelector((state) => state.course)
+  const [loading, setLoading] = useState(false)
+  const { token } = useSelector((state) => state.auth)
 
-    const dispatch = useDispatch();
-    const {courseId} = useParams();
-    const {token} = useSelector(state=>state.auth);
-    const {course} = useSelector(state=>state.course);
-    const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        const populateCourseDetails = async () => {
-            setLoading(true);
-            const result = await fetchCourseDetails(courseId, token);
-            if(result?.courseDetails){
-                dispatch(setEditCourse(true));;
-                dispatch(setCourse(result?.courseDetails))
-            }
-            setLoading(false);
-        }
-        populateCourseDetails();
-    },[])
-    
-
-    if (loading) {
-        return (
-          <div className="grid flex-1 place-items-center">
-            <div className="spinner"></div>
-          </div>
-        )
+  useEffect(() => {
+    ;(async () => {
+      setLoading(true)
+      const result = await getFullDetailsOfCourse(courseId, token)
+      if (result?.courseDetails) {
+        dispatch(setEditCourse(true))
+        dispatch(setCourse(result?.courseDetails))
       }
+      setLoading(false)
+    })()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="grid flex-1 place-items-center">
+        <div className="spinner"></div>
+      </div>
+    )
+  }
 
   return (
-
-        <div>
+    <div>
       <h1 className="mb-14 text-3xl font-medium text-richblack-5">
         Edit Course
       </h1>
@@ -54,7 +52,5 @@ export default function EditCourse() {
         )}
       </div>
     </div>
-      
-
   )
 }

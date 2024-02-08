@@ -42,7 +42,6 @@ export default function CourseReviewModal({ setReviewModal }) {
     setReviewModal(false)
   }
 
-
   return (
     <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
       <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-richblack-400 bg-richblack-800">
@@ -89,7 +88,7 @@ export default function CourseReviewModal({ setReviewModal }) {
                 id="courseExperience"
                 placeholder="Add Your Experience"
                 {...register("courseExperience", { required: true })}
-                className="form-style resize-x-none min-h-[130px] w-full"
+                className="form-style text-richblack-100 bg-richblack-700 rounded-md px-2 py-2 resize-x-none min-h-[130px] w-full"
               />
               {errors.courseExperience && (
                 <span className="ml-2 text-xs tracking-wide text-pink-200">
@@ -104,7 +103,9 @@ export default function CourseReviewModal({ setReviewModal }) {
               >
                 Cancel
               </button>
-              <IconBtn text="Save" />
+               <button className="bg-yellow-50 rounded-md px-4 py-1 font-semibold">
+                Save
+               </button>
             </div>
           </form>
         </div>

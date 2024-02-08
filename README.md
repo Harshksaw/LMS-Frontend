@@ -1,190 +1,98 @@
-# STUDYNOTION
+# StudyNotion
+## Live 
+https://study-notion-frontend-wheat.vercel.app/ \
+otp mail will be in your spam section
+## Installation
 
-StudyNotion is a comprehensive educational platform aimed at providing a seamless experience for students and educators alike. It offers a range of features that facilitate learning, collaboration, and resource sharing.
+1. Clone the repository: `https://github.com/Horror26/StudyNotion.git`
+2. Navigate to the project directory: `cd `
+3. Install dependencies: `npm install`
 
-![StudyNotion Logo](https://res.cloudinary.com/dvpulu3cc/image/upload/v1702489710/Screenshot_2023-12-13_231558_dwyhv3.png)
+## Configuration
 
+1. For only frontend replace the example.env file in root with .env and
+     ```sh
+    npm run start
+    ```
+2. Replace an `example.env` files with your enviroment virables
+3. Start the development server.
+    ```sh
+    npm run dev
+    ```
+## Contributing
 
-## DESCRIPTION
+Contributions are welcome! If you have any suggestions or find any issues, please feel free to open an issue or a pull request.
 
-The StudyNotion project is designed to streamline the educational process. It allows users to access a variety of educational materials, collaborate on projects, and interact with educators, enhancing the learning experience. StudyNotion employs a monolithic architecture and leverages a tech stack involving React.js, Node.js, Express.js, MongoDB, Cloudinary, and Tailwind CSS.
+## System Architecture
 
-## TECHNOLOGY STACK
+The Study Notion EdTech platform consists of three main components: the front-end, the back-end, and the database. The platform follows a client-server architecture, with the front-end serving as the client and the back-end and database serving as the server.
 
-StudyNotion is built using the following technologies:
+### Front-end
 
-### FRONTEND
+The front-end of the platform is built using ReactJS, which allows for the creation of dynamic and responsive user interfaces, crucial for providing an engaging learning experience to students. The front-end communicates with the back-end using RESTful API calls.
 
-- *FIGMA :*
-  Figma is a collaborative interface design tool that enables multiple users to work on designing clean and minimal user interfaces simultaneously. Its cloud-based approach makes it accessible for design teams to create, prototype, and collaborate on user interface designs.
+#### Front End Pages
 
-- *REACT.JS :*
-  React.js is a widely used JavaScript library for building user interfaces. It allows for the creation of interactive and reusable UI components, enabling efficient rendering and managing of application state, leading to a seamless user experience.
+For Students:
 
-- *CSS & TAILWIND :*
-  Both CSS (Cascading Style Sheets) and Tailwind CSS are styling frameworks used to create visually appealing and responsive user interfaces. CSS is the fundamental technology for styling web pages, while Tailwind CSS is a utility-first CSS framework that aids in building custom designs by composing utility classes.
+- **Homepage:** A brief introduction to the platform with links to the course list and user details.
+- **Course List:** A list of all the courses available on the platform, along with their descriptions and ratings.
+- **Wishlist:** Displays all the courses that a student has added to their wishlist.
+- **Cart Checkout:** Allows the user to complete course purchases.
+- **Course Content:** Presents the course content for a particular course, including videos and related material.
+- **User Details:** Provides details about the student's account, including their name, email, and other relevant information.
+- **User Edit Details:** Allows students to edit their account details.
 
-- *REDUX :*
-  Redux is a predictable state container for JavaScript applications. It helps manage the application's state and centralizes the state logic, making it easier to maintain and manage state changes across different parts of the application.
+For Instructors:
 
-- *CHART.JS :*
-  Chart.js is an open-source JavaScript charting library that allows developers to create interactive and visually appealing charts on web applications. It's easy to use and provides a variety of chart types, making data visualization more accessible and engaging for users.
+- **Dashboard:** Offers an overview of the instructor's courses, along with ratings and feedback for each course.
+- **Insights:** Provides detailed insights into the instructor's courses, including the number of views, clicks, and other relevant metrics.
+- **Course Management Pages:** Enables instructors to create, update, and delete courses, as well as manage course content and pricing.
+- **View and Edit Profile Details:** Allows instructors to view and edit their account details.
 
-### BACKEND
+#### Front-end Tools and Libraries
 
-- *NODE.JS :*
-  Node.js is a server-side runtime environment that allows the execution of JavaScript code outside a web browser. It is based on the V8 JavaScript engine and is designed to build scalable and fast network applications. In StudyNotion, Node.js serves as the foundational technology for the backend, facilitating the server operations, handling HTTP requests, and managing the overall application workflow.
+To build the front-end, we use frameworks and libraries such as ReactJS, CSS, and Tailwind for styling, and Redux for state management.
 
-- *EXPRESS.JS :*
-  Express.js is a minimal and flexible Node.js web application framework. It provides a robust set of features to build web applications and APIs. In the context of StudyNotion, Express.js simplifies routing, middleware implementation, and handling HTTP requests, allowing for efficient creation and management of backend APIs.
+### Back-end
 
-- *MONGODB :*
-  MongoDB is a popular NoSQL database that uses a flexible and JSON-like document structure. It's well-known for its scalability, flexibility, and high performance. StudyNotion leverages MongoDB to store and manage data efficiently, allowing for easy adaptation to changing data requirements and enabling seamless integration with the application.
+The back-end of the platform is built using NodeJS and ExpressJS, providing APIs for the front-end to consume. These APIs include functionalities such as user authentication, course creation, and course consumption. The back-end also handles the logic for processing and storing the course content and user data.
 
-- *CLOUDINARY :*
-  Cloudinary is a cloud-based media management solution that specializes in the storage, optimization, and delivery of images and videos. In StudyNotion, Cloudinary plays a crucial role in managing all media-related content, including images, videos, and documents. It provides functionalities for uploading, storage, and manipulation of media files, ensuring a reliable and scalable media management system.
+#### Back-end Features
 
-## ARCHITECTURE DIAGRAM
+- **User Authentication and Authorization:** Students and instructors can sign up and log in to the platform using their email addresses and passwords. The platform also supports OTP (One-Time Password) verification and forgot password functionality for added security.
+- **Course Management:** Instructors can create, read, update, and delete courses, as well as manage course content and media. Students can view and rate courses.
+- **Payment Integration:** Students will purchase and enroll in courses by completing the checkout flow, followed by Razorpay integration for payment handling.
+- **Cloud-based Media Management:** StudyNotion uses Cloudinary, a cloud-based media management service, to store and manage all media content, including images, videos, and documents.
+- **Markdown Formatting:** Course content in document format is stored in Markdown format, allowing for easier display and rendering on the front-end.
 
-![Architecture Diagram](https://res.cloudinary.com/dvpulu3cc/image/upload/v1699036870/Screenshot_2023-11-04_000952_argzj8.jpg)
+#### Back-end Frameworks, Libraries, and Tools
 
-## API ROUTE
+The back-end of StudyNotion uses various frameworks, libraries, and tools to ensure its functionality and performance, including:
 
-### AUTHENTICATION
+- **Node.js:** Used as the primary framework for the back-end.
+- **Express.js:** Used as a web application framework, providing a range of features and tools for building web applications.
+- **MongoDB:** Used as the primary database, providing a flexible and scalable data storage solution.
+- **JWT (JSON Web Tokens):** Used for authentication and authorization, providing a secure and reliable way to manage user credentials.
+- **Bcrypt:** Used for password hashing, adding an extra layer of security to user data.
+- **Mongoose:** Used as an Object Data Modeling (ODM) library, providing a way to interact with MongoDB using JavaScript.
 
-| ENDPOINT              | API PATH                           |
-|-----------------------|------------------------------------|
-| SENDOTP               | `api/v1/auth/sendotp`              |
-| SIGNUP                | `api/v1/auth/signup`               |
-| LOGIN                 | `api/v1/auth/login`                |
-| RESETPASSTOKEN        | `api/v1/auth/reset-password-token` |
-| RESETPASSWORD         | `api/v1/auth/reset-password`       |
+#### Data Models and Database Schema
 
-### PROFILE
+The back-end of StudyNotion uses several data models and database schemas to manage data, including:
 
-| ENDPOINT                 | API PATH                               |
-|--------------------------|----------------------------------------|
-| GET_USER_DETAILS         | `api/v1/profile/getUserDetails`        |
-| GET_USER_ENROLLED_COURSES| `api/v1/profile/getEnrolledCourses`    |
-| GET_INSTRUCTOR_DATA      | `api/v1/profile/instructorDashboard`   |
+- **Student Schema:** Includes fields such as name, email, password, and course details for each student.
+- **Instructor Schema:** Includes fields such as name, email, password, and course details for each instructor.
+- **Course Schema:** Includes fields such as course name, description, instructor details, and media content.
 
-### STUDENT 
+### Database
 
-| ENDPOINT                 | API PATH                               |
-|--------------------------|----------------------------------------|
-| COURSE_PAYMENT           | `api/v1/payment/capturePayment`        |
-| COURSE_VERIFY            | `api/v1/payment/verifyPayment`         |
-| SEND_PAYMENT_SUCCESS_EMAIL| `api/v1/payment/sendPaymentSuccessEmail`|
+The database for the platform is built using MongoDB, a NoSQL database that provides a flexible and scalable data storage solution. MongoDB allows for the storage of unstructured and semi-structured data. The database stores the course content, user data, and other relevant information related to the platform.
 
-### COURSE 
+![Database Schema](img/schema.png)
 
-| ENDPOINT                     | API PATH                                    |
-|------------------------------|---------------------------------------------|
-| GET_ALL_COURSE               | `api/v1/course/getAllCourses`                 |
-| COURSE_DETAILS               | `api/v1/course/getCourseDetails`              |
-| EDIT_COURSE                  | `api/v1/course/editCourse`                    |
-| COURSE_CATEGORIES            | `api/v1/course/showAllCategories`             |
-| CREATE_COURSE                | `api/v1/course/createCourse`                 |
-| CREATE_SECTION               | `api/v1/course/addSection`                   |
-| CREATE_SUBSECTION            | `api/v1/course/addSubSection`                |
-| UPDATE_SECTION               | `api/v1/course/updateSection`                |
-| UPDATE_SUBSECTION            | `api/v1/course/updateSubSection`             |
-| GET_ALL_INSTRUCTOR_COURSES   | `api/v1/course/getInstructorCourses`         |
-| DELETE_SECTION               | `api/v1/course/deleteSection`                |
-| DELETE_SUBSECTION            | `api/v1/course/deleteSubSection`             |
-| DELETE_COURSE                | `api/v1/course/deleteCourse`                 |
-| GET_FULL_COURSE_DETAILS_AUTHENTICATED | `api/v1/course/getFullCourseDetails`|
-| LECTURE_COMPLETION           | `api/v1/course/updateCourseProgress`         |
-| CREATE_RATING                | `api/v1/course/createRating`                 |
+### Architecture Diagram
 
-### RATINGS & REVIEWS
+Below is a high-level diagram that illustrates the architecture of the StudyNotion EdTech platform:
 
-| ENDPOINT                  | API PATH                          |
-|---------------------------|-----------------------------------|
-| REVIEWS_DETAILS           | `api/v1/course/getReviews`        |
-
-### CATEGORIES 
-
-| ENDPOINT              | API PATH                              |
-|-----------------------|---------------------------------------|
-| CATEGORIES            | `api/v1/course/showAllCategories`      |
-
-### CATALOG
-| ENDPOINT              | API PATH                              |
-|-----------------------|---------------------------------------|
-| CATALOG_PAGE_DATA       | `api/v1/course/getCategoryPageDetails`|
-
-### CONTACT US 
-
-| ENDPOINT              | API PATH                           |
-|-----------------------|------------------------------------|
-| CONTACT_US            | `api/v1/reach/contact`              |
-
-### SETTING
-
-| ENDPOINT                  | API PATH                              |
-|---------------------------|---------------------------------------|
-| UPDATE_DISPLAY_PICTURE     | `api/v1/profile/updateDisplayPicture`  |
-| UPDATE_PROFILE             | `api/v1/profile/updateProfile`        |
-| CHANGE_PASSWORD            | `api/v1/auth/changepassword`          |
-| DELETE_PROFILE             | `api/v1/profile/deleteProfile`       |
-
-### SCHEMA DESIGN
-![Schema Design](https://res.cloudinary.com/dvpulu3cc/image/upload/v1699036870/Screenshot_2023-11-04_001024_ef0phq.jpg)
-
-### FUNCTIONALITIES
-
-The back end of StudyNotion provides a range of features and functionalities, including:
-
-1. *USER AUTHENTICATION & AUTHORIZATION:* Students and instructors can sign up and log in using email addresses and passwords. The platform supports OTP (One-Time Password) verification and forgot password functionality for enhanced security.
-2. *COURSE MANAGEMENT:* Instructors can create, read, update, and delete courses, manage course content, and media. Students can view and rate courses.
-3. *PAYMENT INTEGRATION:* Students can purchase and enroll in courses by completing the checkout flow that includes Razorpay integration for payment handling.
-4. *CLOUD-BASED MEDIA MANAGEMENT:* StudyNotion utilizes Cloudinary, a cloud-based media management service, to store and manage all media content, including images, videos, and documents.
-5. *MARKDOWN FORMATTING:* Course content is stored in Markdown format, allowing easier display and rendering on the front end.
-
-### FRONTEND
-
-The front end of StudyNotion is designed using Figma, a popular design tool that allows for the creation of clean and minimal user interfaces. It comprises various pages for Students, Instructors, and potential Admin functionalities:
-
-#### STUDENT
-
-- *HOMEPAGE:* Brief introduction to the platform with links to the course list and user details.
-- *COURSE LIST:* Displays all available courses with descriptions and ratings.
-- *WISHLIST:* Shows courses added to the student's wishlist.
-- *CART CHECKOUT:* Allows users to complete the course purchase.
-- *COOURSE CONTENT:* Displays course material, including videos and related content.
-- *USER DETAILS:* Contains information about the student's account.
-- *USER EDIT DETAILS:* Enables students to edit their account details.
-
-#### INSTRUCTOR
-
-- *DASHBOARD:* Overview of the instructor's courses, including ratings and feedback.
-- *INSIGHTS:* Detailed metrics of the instructor's courses.
-- *COURSE MANAGEMENT PAGES:* Creation, update, and deletion of courses, as well as managing content and pricing.
-- *VIEW & EDIT PROFILE DETAILS:* View and edit account details.
-
-#### ADMIN (Future Scope)
-
-- *DASHBOARD:* Overview of the platform's courses, instructors, and students.
-- *INSIGHTS:* Detailed metrics of the platform, including user count, courses, and revenue.
-- *INSTRUCTOR MANAGEMENT:* Admin access to manage instructors, their account details, courses, and ratings.
-- *MISCELLANEOUS* Access to user and course management pages.
-
-
-## OPEN SOURCE
-
-We welcome contributions to enhance StudyNotion. Please fork the repository, make your changes, and submit a pull request for review.
-
-## LICENSE
-
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
-
-## CONTACT
-
-For any queries or suggestions, feel free to contact the authors:
-- Harsh kr: [Email](mister.harshkumar@gmail.com)
-
-
-## ACKNOWLEDGEMENT
-
-We would like to acknowledge the invaluable support and inspiration from the open-source community and various educational platforms that motivated us to develop StudyNotion.
+![Architecture](img/arcti.png)

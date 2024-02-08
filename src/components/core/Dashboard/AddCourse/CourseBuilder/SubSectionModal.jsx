@@ -1,15 +1,16 @@
-
-import { useForm } from "react-hook-form";
-import { setCourse } from "../../../../../slices/courseSlice";
-import { createSubSection, updateSubSection } from "../../../../../services/operations/courseDetailsAPI";
-
 import { useEffect, useState } from "react"
-
+import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
 import { RxCross2 } from "react-icons/rx"
 import { useDispatch, useSelector } from "react-redux"
-import IconBtn from "../../../../common/IconBtn";
 
+import {
+  createSubSection,
+  updateSubSection,
+} from "../../../../../services/operations/courseDetailsAPI"
+import { setCourse } from "../../../../../slices/courseSlice"
+import IconBtn from "../../../../common/IconBtn"
+import Upload from "../Upload"
 
 export default function SubSectionModal({
   modalData,
@@ -24,99 +25,104 @@ export default function SubSectionModal({
     setValue,
     formState: { errors },
     getValues,
-  } = useForm();
+  } = useForm()
+
+  // console.log("view", view)
+  // console.log("edit", edit)
+  // console.log("add", add)
+
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
   const { token } = useSelector((state) => state.auth)
   const { course } = useSelector((state) => state.course)
 
   useEffect(() => {
-    if(view || edit) {
-      // console.log("Modal data for edit/view", modalData)
+    if (view || edit) {
+      // console.log("modalData", modalData)
       setValue("lectureTitle", modalData.title)
       setValue("lectureDesc", modalData.description)
       setValue("lectureVideo", modalData.videoUrl)
-   }
+    }
   }, [])
-  
-  const isFormUpdated = () => {
-      const currentValues = getValues()
 
-      if(
-          currentValues.lectureTitle !== modalData.title ||
-          currentValues.lectureDesc !== modalData.description ||
-          currentValues.lectureVideo !== modalData.videoUrl
-      ){
-          return true
-      }
-      return false
+  // detect whether form is updated or not
+  const isFormUpdated = () => {
+    const currentValues = getValues()
+    // console.log("changes after editing form values:", currentValues)
+    if (
+      currentValues.lectureTitle !== modalData.title ||
+      currentValues.lectureDesc !== modalData.description ||
+      currentValues.lectureVideo !== modalData.videoUrl
+    ) {
+      return true
+    }
+    return false
   }
 
   // handle the editing of subsection
-const handleEditSubsection = async () => {
-  const currentValues = getValues()
-  // console.log("changes after editing form values:", currentValues)
-  const formData = new FormData()
-  // console.log("Values After Editing form values:", currentValues)
-  formData.append("sectionId", modalData.sectionId)
-  formData.append("subSectionId", modalData._id)
-  if (currentValues.lectureTitle !== modalData.title) {
-    formData.append("title", currentValues.lectureTitle)
-  }
-  if (currentValues.lectureDesc !== modalData.description) {
-    formData.append("description", currentValues.lectureDesc)
-  }
-  if (currentValues.lectureVideo !== modalData.videoUrl) {
-    formData.append("video", currentValues.lectureVideo)
-  }
-
-  // console.log("Values After Editing form values:", formData)
-  setLoading(true)
-  const result = await updateSubSection(formData, token)
-  if (result) {
-    // console.log("result", result)
-    // update the structure of course
-    const updatedCourseContent = course.courseContent.map((section) =>
-      section._id === modalData.sectionId ? result : section
-    )
-    const updatedCourse = { ...course, courseContent: updatedCourseContent }
-    dispatch(setCourse(updatedCourse))
-  }
-  setModalData(null)
-  setLoading(false)
-}
-
-const onSubmit = async (data) => {
-  // console.log(data)
-  if (view) return
-
-  if (edit) {
-    if (!isFormUpdated()) {
-      toast.error("No changes made to the form")
-    } else {
-      handleEditSubsection()
+  const handleEditSubsection = async () => {
+    const currentValues = getValues()
+    // console.log("changes after editing form values:", currentValues)
+    const formData = new FormData()
+    // console.log("Values After Editing form values:", currentValues)
+    formData.append("sectionId", modalData.sectionId)
+    formData.append("subSectionId", modalData._id)
+    if (currentValues.lectureTitle !== modalData.title) {
+      formData.append("title", currentValues.lectureTitle)
     }
-    return
+    if (currentValues.lectureDesc !== modalData.description) {
+      formData.append("description", currentValues.lectureDesc)
+    }
+    if (currentValues.lectureVideo !== modalData.videoUrl) {
+      formData.append("video", currentValues.lectureVideo)
+    }
+    setLoading(true)
+    const result = await updateSubSection(formData, token)
+    if (result) {
+      // console.log("result", result)
+      // update the structure of course
+      const updatedCourseContent = course.courseContent.map((section) =>
+        section._id === modalData.sectionId ? result : section
+      )
+      const updatedCourse = { ...course, courseContent: updatedCourseContent }
+      dispatch(setCourse(updatedCourse))
+    }
+    setModalData(null)
+    setLoading(false)
   }
 
-  const formData = new FormData()
-  formData.append("sectionId", modalData)
-  formData.append("title", data.lectureTitle)
-  formData.append("description", data.lectureDesc)
-  formData.append("video", data.lectureVideo)
-  setLoading(true)
-  const result = await createSubSection(formData, token)
-  if (result) {
-    // update the structure of course
-    const updatedCourseContent = course.courseContent.map((section) =>
-      section._id === modalData ? result : section
-    )
-    const updatedCourse = { ...course, courseContent: updatedCourseContent }
-    dispatch(setCourse(updatedCourse))
+  const onSubmit = async (data) => {
+    // console.log(data)
+    if (view) return
+
+    if (edit) {
+      if (!isFormUpdated()) {
+        toast.error("No changes made to the form")
+      } else {
+        handleEditSubsection()
+      }
+      return
+    }
+
+    const formData = new FormData()
+    formData.append("sectionId", modalData)
+    formData.append("title", data.lectureTitle)
+    formData.append("description", data.lectureDesc)
+    formData.append("video", data.lectureVideo)
+    setLoading(true)
+    const result = await createSubSection(formData, token)
+    if (result) {
+      // update the structure of course
+      const updatedCourseContent = course.courseContent.map((section) =>
+        section._id === modalData ? result : section
+      )
+      const updatedCourse = { ...course, courseContent: updatedCourseContent }
+      dispatch(setCourse(updatedCourse))
+    }
+    setModalData(null)
+    setLoading(false)
   }
-  setModalData(null)
-  setLoading(false)
-}
+
   return (
     <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
       <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-richblack-400 bg-richblack-800">
@@ -184,17 +190,17 @@ const onSubmit = async (data) => {
           </div>
           {!view && (
             <div className="flex bg-yellow-50  rounded-md w-fit px-3 py-1 justify-end">
-              <IconBtn
+              {/* <IconBtn
                 disabled={loading}
                 text={loading ? "Loading.." : edit ? "Save Changes" : "Save"}
-              />
+              /> */}
               <button>
-                {loading ? "Loading.." : edit ? "Save Changes" : "Save"}
+              {loading ? "Loading.." : edit ? "Save Changes" : "Save"}
               </button>
             </div>
           )}
         </form>
       </div>
     </div>
-  );
+  )
 }

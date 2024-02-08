@@ -4,20 +4,17 @@ import { HiOutlineGlobeAlt } from "react-icons/hi"
 import { ReactMarkdown } from "react-markdown/lib/react-markdown"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
-import { toast } from "react-hot-toast"
+
 import ConfirmationModal from "../components/common/ConfirmationModal"
 import Footer from "../components/common/Footer"
 import RatingStars from "../components/common/RatingStars"
-import CourseAccordionBar from "../components/core/Course/CourseAccordionBar"
+import CourseAccordionBar from "../components/core/Course/CourseAccordianBar"
 import CourseDetailsCard from "../components/core/Course/CourseDetailsCard"
 import { formatDate } from "../services/formatDate"
 import { fetchCourseDetails } from "../services/operations/courseDetailsAPI"
 import { buyCourse } from "../services/operations/studentFeaturesAPI"
 import GetAvgRating from "../utils/avgRating"
 import Error from "./Error"
-import { ACCOUNT_TYPE } from "../../src/utils/constants"
-import { addToCart } from "../slices/cartSlice"
-
 
 function CourseDetails() {
   const { user } = useSelector((state) => state.profile)
@@ -119,25 +116,6 @@ function CourseDetails() {
     })
   }
 
-  const handleAddToCart = () => {
-    if (user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
-      toast.error("You are an Instructor. You can't buy a course.")
-      return
-    }
-    if (token) {
-      dispatch(addToCart(response?.data?.courseDetails))
-      return
-    }
-    setConfirmationModal({
-      text1: "You are not logged in!",
-      text2: "Please login to add To Cart",
-      btn1Text: "Login",
-      btn2Text: "Cancel",
-      btn1Handler: () => navigate("/login"),
-      btn2Handler: () => setConfirmationModal(null),
-    })
-  }
-
   if (paymentLoading) {
     // console.log("payment loading")
     return (
@@ -199,7 +177,7 @@ function CourseDetails() {
               <button className="yellowButton" onClick={handleBuyCourse}>
                 Buy Now
               </button>
-              <button onClick={handleAddToCart} className="blackButton">Add to Cart</button>
+              <button className="blackButton">Add to Cart</button>
             </div>
           </div>
           {/* Courses Card */}
@@ -287,4 +265,4 @@ function CourseDetails() {
   )
 }
 
-export default CourseDetails  
+export default CourseDetails
