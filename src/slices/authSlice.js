@@ -1,26 +1,31 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-    signUpDate:null,
-    loading: false,
-    token: localStorage.getItem("token")? (JSON.parse(localStorage.getItem("token"))) : (null),
-}
 
-export const authSlice = createSlice({
-    name:"auth",
-    initialState:initialState,
-    reducers:{
-        setLoading(state, value){
-            state.loading = value.payload;
-        },
-        setToken( state, value ){
-            state.token = value.payload;
-        },
-        setSignUpData(state, value){
-            state.signUpDate = value.payload;
-        }
-    }
-})
+const initialState = {                                 // initialize the initial state with null value and if localStorage contain token value then we store that in token; let pichla bar website
+  signupData: null,                                    // open kiye the tab darkmode kiye huye the and if we open again then it display darkmode if mode is include in token
+  loading: false,                                      //localStorage is similar to sessionStorage, except that while localStorage data has no expiration time, sessionStorage data gets cleared when the page session ends — that is, when the page is closed.
+  token: localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null,
+  // token: null,
+};
 
-export const {setToken, setSignUpData, setLoading} = authSlice.actions;
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState: initialState,
+
+  reducers: {                                                  // using reducers we can set the value of initial State;
+    setSignupData(state, value) {
+      state.signupData = value.payload;
+    },
+    setLoading(state, value) {
+      state.loading = value.payload;
+    },
+    setToken(state, value) {
+      state.token = value.payload;
+    },
+  },
+});
+
+export const { setSignupData, setLoading, setToken } = authSlice.actions;
+
 export default authSlice.reducer;

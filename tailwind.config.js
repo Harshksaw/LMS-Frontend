@@ -7,7 +7,6 @@ module.exports = {
       "edu-sa": ["Edu SA Beginner", "cursive"],
       mono: ["Roboto Mono", "monospace"],
     },
-    
     colors: {
       white: "#fff",
       black: "#000",
@@ -125,7 +124,6 @@ module.exports = {
         900: "#141414",
       },
     },
-
     extend: {
       maxWidth: {
         maxContent: "1260px",

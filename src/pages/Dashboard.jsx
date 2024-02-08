@@ -1,23 +1,38 @@
+
 import React from 'react'
-import { Outlet } from 'react-router-dom';
-import Sidebar from '../components/core/Dashboard/Sidebar'; 
+import {useSelector} from 'react-redux'
+import {Outlet} from 'react-router-dom'
+import Sidebar from '../components/core/Dashboard/Sidebar'
 
-const Dashboard = () => {
-  return (
-    <div className='h-screen flex' >
-
-        {/* sidebar */}
-        <Sidebar/>
-
-        {/* my profile section*/}
-        <div className='w-full overflow-auto ' >
-          <div className='mx-auto h-full w-11/12 max-w-[1000px] ' >
-              <Outlet/>
-          </div>
+ const Dashboard = () => {
+    const {loading: authLoading} = useSelector((state )=> state.auth)
+    const { loading: profileLoading } = useSelector((state) => state.profile)
+  const {user} = useSelector((state) => state.profile);
+    if(user === null){
+      return(
+        <div>
+          User is null
         </div>
+      )
+    }
 
+if(authLoading || profileLoading){
+  return(
+    <div className='loading'>
+      <h1>Loading...</h1>
     </div>
   )
 }
 
-export default Dashboard;
+  return (
+    <div className="relative flex min-h-[calc(100vh-3.5rem)]">
+    <Sidebar />
+    <div className="h-[calc(100vh-3.5rem)] flex-1 overflow-auto">
+      <div className="mx-auto w-11/12 max-w-[1000px] py-10">
+        <Outlet />
+      </div>
+    </div>
+  </div>
+  )
+}
+export default Dashboard

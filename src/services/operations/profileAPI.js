@@ -1,11 +1,11 @@
 import { toast } from "react-hot-toast"
 
-import { setLoading, setProfile } from "../../slices/profileSlice"
+import { setLoading, setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiconnector"
 import { profileEndpoints } from "../apis"
 import { logout } from "./authAPI"
 
-const { GET_USER_DETAILS_API, GET_USER_ENROLLED_COURSES_API } = profileEndpoints
+const { GET_USER_DETAILS_API, GET_USER_ENROLLED_COURSES_API, GET_INSTRUCTOR_DATA_API } = profileEndpoints
 
 export function getUserDetails(token, navigate) {
   return async (dispatch) => {
@@ -23,7 +23,7 @@ export function getUserDetails(token, navigate) {
       const userImage = response.data.data.image
         ? response.data.data.image
         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.data.firstName} ${response.data.data.lastName}`
-      dispatch(setProfile({ ...response.data.data, image: userImage }))
+      dispatch(setUser({ ...response.data.data, image: userImage }))
     } catch (error) {
       dispatch(logout(navigate))
       console.log("GET_USER_DETAILS API ERROR............", error)
@@ -44,7 +44,7 @@ export async function getUserEnrolledCourses(token) {
       GET_USER_ENROLLED_COURSES_API,
       null,
       {
-        Authorisation: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       }
     )
     console.log("AFTER Calling BACKEND API FOR ENROLLED COURSES");
@@ -63,4 +63,25 @@ export async function getUserEnrolledCourses(token) {
   }
   toast.dismiss(toastId)
   return result
+}
+
+export async function getInstructorData(token) {
+  const toastId = toast.loading("Loading...");
+  let result = [];
+  try{
+    const response = await apiConnector("GET", GET_INSTRUCTOR_DATA_API, null, 
+    {
+      Authorization: `Bearer ${token}`,
+    })
+
+    console.log("GET_INSTRUCTOR_API_RESPONSE", response);
+    result = response?.data?.courses
+
+  }
+  catch(error) {
+    console.log("GET_INSTRUCTOR_API ERROR", error);
+    toast.error("Could not Get Instructor Data")
+  }
+  toast.dismiss(toastId);
+  return result;
 }

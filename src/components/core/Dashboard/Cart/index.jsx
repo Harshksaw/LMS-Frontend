@@ -1,32 +1,33 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
-import RenderCartCourses from './RenderCartCourses'
-import RenderTotalAmount from './RenderTotalAmount'
+import { useDispatch, useSelector } from "react-redux"
 
 
-const Cart = () => {
-
-    const {total, totalItems} = useSelector((state) => state.cart)
-
+function Cart() {
+  const {total , totalItems} = useSelector((state)=> state.auth)
   return (
-    <div className='text-white' >
-        <h1>Your Cart</h1>
-        <p>{totalItems} Courses in Cart</p>
+    <div>
+      <h1>Cart</h1>
 
-        {
-            total > 0 ? 
-            (
-                <div>
-                    <RenderCartCourses/>
-                    <RenderTotalAmount/>
-                </div>
-            ) 
-            : (
-                <p>Your Cart is Empty.</p>
-            )
-        }
+      <p>
+        Total Items : {totalItems}
+      </p>
+      {
+        total >0 ? (
+          <div>
+            <RenderCartCourses/>
+            <RenderTotalItems/>
+          </div>
+        ): (
+          <p>
+            No Items in the cart
+          </p>
+          )
+
+      }
+
+      
     </div>
   )
 }
 
-export default Cart;
+export default Cart

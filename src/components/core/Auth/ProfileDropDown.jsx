@@ -3,9 +3,8 @@ import { AiOutlineCaretDown } from "react-icons/ai"
 import { VscDashboard, VscSignOut } from "react-icons/vsc"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
-
-// import useOnClickOutside from "../../../hooks/useOnClickOutside"....
 import { logout } from "../../../services/operations/authAPI"
+
 
 export default function ProfileDropdown() {
   const { user } = useSelector((state) => state.profile)
@@ -14,12 +13,12 @@ export default function ProfileDropdown() {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
 
-  // useOnClickOutside(ref, () => setOpen(false))...
+//   useOnClickOutside(ref, () => setOpen(false))
 
   if (!user) return null
 
   return (
-    <button className="relative" onClick={() => setOpen((prev) => (!prev))}>
+    <button className="relative" onClick={() => setOpen(true)}>
       <div className="flex items-center gap-x-1">
         <img
           src={user?.image}
