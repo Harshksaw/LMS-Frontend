@@ -1,42 +1,39 @@
-import React from "react";
-
-// Importing React Icons
+import React from 'react'
 import { HiUsers } from "react-icons/hi";
 import { ImTree } from "react-icons/im";
 
-const CourseCard = ({cardData, setCurrentCard}) => {
-  return (
-    <div
-      className={`w-[360px] lg:w-[30%] bg-richblack-800 text-richblack-25 h-[300px] box-border cursor-pointer transform transition-transform duration-400 ease-in-out hover:scale-105 hover:bg-white hover:shadow-[12px_12px_0_0] hover:shadow-yellow-50 hover:text-richblack-800`}
-      onClick={() => setCurrentCard(cardData?.heading)}
-    >
-      <div className="border-b-[2px] border-richblack-400 border-dashed h-[80%] p-6 flex flex-col gap-3">
-        <div
-          className={`font-semibold text-[20px]`}
-        >
-          {cardData?.heading}
-        </div>
+const courseCard = ({ courseData, currentCard, setCurrentCard }) => {
+    
+  // on click function
+  const selectedCard = ( heading ) => {
+    setCurrentCard(heading);
+  }
 
-        <div className="text-richblack-400">{cardData?.description}</div>
+
+  return (
+    <div className={`${courseData.heading === currentCard? " bg-white selectedCardColor " : " bg-richblack-800"}  cursor-pointer w-[90%]  `} onClick={ () => selectedCard(courseData.heading) } >
+
+    {/* top */}
+      <div className='flex flex-col gap-3 px-6 pt-8 ' >
+        <h2 className={`font-semibold text-xl font-inter ${ courseData.heading === currentCard? "text-richblack-800" : "text-richblack-25" } `} >{courseData.heading}</h2>
+        <p className={`text-lg font-normal font-inter lg:h-[180px] ${ courseData.heading === currentCard? "text-richblack-500" : "text-richblack-400 "} `} >{courseData.description}</p>
       </div>
 
-      <div
-        className={`flex justify-between text-blue-300 hover:text-richblack-300 px-6 py-3 font-medium`}
-      >
-        {/* Level */}
-        <div className="flex items-center gap-2 text-[16px]">
+    {/*bottom*/}
+      <div className={`flex flex-row gap-4 items-center justify-between py-4 px-6 border-t-2 border-dashed ${courseData.heading === currentCard? "border-richblack-500 " : "border-richblack-600 "}  `} >
+        {/* left */}
+        <div className={`flex flex-row gap-2 items-center ${courseData.heading === currentCard? "text-blue-300":"text-richblack-300"}  text-lg`} >
           <HiUsers />
-          <p>{cardData?.level}</p>
+          <p className=' font-medium font-inter' >{courseData.level}</p>
         </div>
-
-        {/* Flow Chart */}
-        <div className="flex items-center gap-2 text-[16px]">
+        {/* right */}
+        <div className={`flex flex-row gap-2 items-center ${ courseData.heading === currentCard? "text-blue-300" : "text-richblack-300" }  `} >
           <ImTree />
-          <p>{cardData?.lessionNumber} Lession</p>
+          <p className='text-lg' >{courseData.lessionNumber} Lessons</p>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CourseCard;
+export default courseCard;
