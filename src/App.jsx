@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 import Home from "./pages/Home"
 import Login from "./pages/Login"
-import Signup from "./pages/Signup"
+import Signup from "./pages/SignUp"
 import ForgotPassword from "./pages/ForgotPassword";
 import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
