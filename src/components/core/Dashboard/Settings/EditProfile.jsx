@@ -13,11 +13,7 @@ export default function EditProfile() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm()
+  const { register, handleSubmit, formState: { errors } } = useForm()
 
   const submitProfileForm = async (data) => {
     // console.log("Form Data - ", data)
@@ -31,10 +27,11 @@ export default function EditProfile() {
     <>
       <form onSubmit={handleSubmit(submitProfileForm)}>
         {/* Profile Information */}
-        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
+        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-6 sm:px-12">
           <h2 className="text-lg font-semibold text-richblack-5">
             Profile Information
           </h2>
+
           <div className="flex flex-col gap-5 lg:flex-row">
             <div className="flex flex-col gap-2 lg:w-[48%]">
               <label htmlFor="firstName" className="lable-style">
@@ -55,6 +52,7 @@ export default function EditProfile() {
                 </span>
               )}
             </div>
+
             <div className="flex flex-col gap-2 lg:w-[48%]">
               <label htmlFor="lastName" className="lable-style">
                 Last Name
@@ -104,6 +102,7 @@ export default function EditProfile() {
                 </span>
               )}
             </div>
+
             <div className="flex flex-col gap-2 lg:w-[48%]">
               <label htmlFor="gender" className="lable-style">
                 Gender
@@ -159,6 +158,7 @@ export default function EditProfile() {
                 </span>
               )}
             </div>
+
             <div className="flex flex-col gap-2 lg:w-[48%]">
               <label htmlFor="about" className="lable-style">
                 About
@@ -183,15 +183,14 @@ export default function EditProfile() {
 
         <div className="flex justify-end gap-2">
           <button
-            onClick={() => {
-              navigate("/dashboard/my-profile")
-            }}
+            onClick={() => { navigate("/dashboard/my-profile") }}
             className="cursor-pointer rounded-md bg-richblack-700 py-2 px-5 font-semibold text-richblack-50"
           >
             Cancel
           </button>
           <IconBtn type="submit" text="Save" />
         </div>
+
       </form>
     </>
   )

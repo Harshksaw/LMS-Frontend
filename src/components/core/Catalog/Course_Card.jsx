@@ -1,26 +1,31 @@
-import React, { useEffect, useState } from 'react'
-import RatingStars from '../../common/RatingStars'
-import GetAvgRating from '../../../utils/avgRating';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react"
+// Icons
+// import { FaRegStar, FaStar } from "react-icons/fa"
+// import ReactStars from "react-rating-stars-component"
+import { Link } from "react-router-dom"
 
-const Course_Card = ({course, Height}) => {
-
-
-    const [avgReviewCount, setAvgReviewCount] = useState(0);
-
-    useEffect(()=> {
-        const count = GetAvgRating(course.ratingAndReviews);
-        setAvgReviewCount(count);
-    },[course])
+import GetAvgRating from "../../../utils/avgRating"
+import RatingStars from "../../common/RatingStars"
+import Img from './../../common/Img';
 
 
-    
+
+function Course_Card({ course, Height }) {
+  // const avgReviewCount = GetAvgRating(course.ratingAndReviews)
+  // console.log(course.ratingAndReviews)
+  const [avgReviewCount, setAvgReviewCount] = useState(0)
+  useEffect(() => {
+    const count = GetAvgRating(course.ratingAndReviews)
+    setAvgReviewCount(count)
+  }, [course])
+  // console.log("count............", avgReviewCount)
+
   return (
-    <>
+    <div className='hover:scale-[1.03] transition-all duration-200 z-50 '>
       <Link to={`/courses/${course._id}`}>
         <div className="">
           <div className="rounded-lg">
-            <img
+            <Img
               src={course?.thumbnail}
               alt="course thumnail"
               className={`${Height} w-full rounded-xl object-cover `}
@@ -33,6 +38,15 @@ const Course_Card = ({course, Height}) => {
             </p>
             <div className="flex items-center gap-2">
               <span className="text-yellow-5">{avgReviewCount || 0}</span>
+              {/* <ReactStars
+                count={5}
+                value={avgReviewCount || 0}
+                size={20}
+                edit={false}
+                activeColor="#ffd700"
+                emptyIcon={<FaRegStar />}
+                fullIcon={<FaStar />}
+              /> */}
               <RatingStars Review_Count={avgReviewCount} />
               <span className="text-richblack-400">
                 {course?.ratingAndReviews?.length} Ratings
@@ -42,7 +56,7 @@ const Course_Card = ({course, Height}) => {
           </div>
         </div>
       </Link>
-    </>
+    </div>
   )
 }
 
